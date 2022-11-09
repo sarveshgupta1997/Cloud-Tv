@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    #navbar
+
+    <div id="video">
+        <!-- <video src="https://www.youtube.com/watch?v=VojBOTd6Euo?autoplay=1"></video> -->
+        <iframe width="560" height="315" src="https://www.youtube.com/embed/VojBOTd6Euo?autoplay=1&mute=1"></iframe>
+        <!-- <iframe width="560" height="315" src="https://www.youtube.com/embed/d9MyW72ELq0?autoplay=1&mute=1"></iframe> -->
+        
+    </div>
+    <!-- <video width="320" height="240" controls>
+        <source src="movie.mp4" type="video/mp4">
+        <source src="movie.ogg" type="video/ogg">
+        Your browser does not support the video tag.
+      </video> -->
+    <button id="https://www.youtube.com/embed/d9MyW72ELq0?autoplay=1&mute=1" onmouseover="toggle(id)">avatar</button>
+    <button id="https://www.youtube.com/embed/TcMBFSGVi1c?autoplay=1&mute=1" onmouseover="toggle(id)">avengers</button>
+    <!-- <button id="avengers" onmouseover="toggle(id)">avengers</button> -->
+    <!-- <button id="pause" onmouseover="toggle()">stop</button>
+    <button id="pause" onmouseover="toggle()">stop</button> -->
+    <!-- <iframe width="560" height="315" src="https://www.youtube.com/embed/TcMBFSGVi1c" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe> -->
+</body>
+</html>
+<script>
+    toggle=(id)=>{
+        video= document.querySelector("iframe");
+        // video.src="https://www.youtube.com/embed/d9MyW72ELq0?autoplay=1&mute=1";
+        video.src=id;
+        // if (video.get(0).paused) {
+		// 	video.get(0).play();
+		// } else {
+		// 	video.get(0).pause();
+		// }
+        // video.src="https://www.youtube.com/embed/d9MyW72ELq0?autoplay=1&mute=1";
+        // video.innerHTML='';
+        // video.innerHTML='<iframe width="560" height="315" src="https://www.youtube.com/embed/d9MyW72ELq0?autoplay=1&mute=1"></iframe>';
+        }
+    // var toggle = () => { 
+    // var iframes = document.querySelectorAll('iframe');
+    // Array.prototype.forEach.call(iframes, iframe => { 
+    //     iframe.contentWindow.postMessage(JSON.stringify({ event: 'command', 
+    // func: 'stopVideo' }), '*');
+    // });
+    // }
+    // toggle();
+    
+</script>
