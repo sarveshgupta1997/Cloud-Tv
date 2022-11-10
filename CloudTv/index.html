@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <style>
+    * {
+      padding: 0;
+      margin: 0;
+      font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+      line-break: loose;
+      
+      letter-spacing: 0.05em; 
+    }
+                              /* Navbarar */
+    #navbar {
+      position: sticky;
+      top: 0;
+      background-color: black;
+      height: 50px;
+      z-index: 999 !important;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 40px;
+    }
+    #navbar >img{
+      height: 50px;
+      object-fit: cover;
+    }
+    .prof_search>input{
+      background-color: black;
+      color: rgb(187, 187, 187);
+      width: 150px;
+      border:1px solid white;
+      padding: 4px 10px;
+      border-radius: 4px;
+      font-size: 15px;
+    }
+    /* .prof_search>input::placeholder{
+      color: rgb(187, 187, 187);
+    } */ 
+    .prof_search img{
+      height: 11px;
+    }
+    .prof_search>button{
+      background-color: #007aff;
+      color: white;
+      width: 95px;
+      padding: 5px 10px;
+      border-radius: 8px;
+      font-size: 15px;
+      letter-spacing: 0.05em;
+    }
+                                  /* Banner */
+    #video {
+      margin-top: -120px;
+      /* background: linear-gradient(to left, rgba(255,192,203, 0) 50%, gray 60%, black 100%); */
+    }
+    .img_banner,
+    .banner_video {
+      position: absolute;
+      width: 100vw;
+      height: 130vh;
+      z-index: 0;
+    }
+    .img_banner {
+      object-fit: cover;
+    }
+    .banner_video {
+      /* transition: 2s; */
+      /* opacity: 0; */
+      /* transition: opacity 5s linear; */
+    }
+    #details {
+      position: relative;
+      z-index: 10;
+      height: 100%;
+      padding-left: 40px;
+      width: 300px;
+      background: linear-gradient(to left, rgba(255,192,203, 0) 0%, black 100%);
+      line-height: 1.4em;      
+      padding-bottom: 30px;
+    }
+    #video .img_production,
+    #video .h5_genre,
+    #video .p_desc,
+    #video .but_trial,
+    #video h6,
+    #video h3,
+    #video .chnge {
+      position: relative;
+    }
+    .img_production {
+      height: 45px;
+      object-fit: cover;
+      margin-top: 400px;
+    }
+    #video .h5_genre{
+      margin-top: 12px;
+      font-size: 12px;
+      color:rgb(206, 206, 206);
+    }
+    #video .h5_genre span{
+      font-size: 13px;
+      color:rgb(180, 180, 180);
+    }
+    #video .p_desc{
+      margin-top: 12px;
+      font-size: 16px;
+      color:rgb(216, 216, 216);
+    }
+    #video .but_trial{
+      width: 75%;
+      margin-top: 12px;
+      color: black;
+      background-color: white;
+      border: none;
+      border-radius: 5px;
+      padding: 10px 12px;
+      font-size: 15px;
+      font-weight: bold;
+      box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    }
+    #video h6{
+      margin-top: 7px;
+      font-size: 12px;
+      color:rgb(158, 158, 158);
+      margin-left: 18px;
+    }
+    #video h3{
+      margin-top: 32px;
+      font-size: 22px;
+      color:rgb(216, 216, 216);
+
+    }
+    
+    #box{
+      position: relative;
+      width: 100%;
+      margin: auto;
+      margin-top:-10px;
+      padding: 0px 40px;
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 20px;
+      background: linear-gradient(to bottom, rgba(255,192,203, 0) 0%, rgb(0, 0, 0) 10%, black 100%);
+      z-index: 1000;
+    }
+    .banner_cards{
+      position: relative;
+      width: 100%;
+      border-radius: 10px;
+      overflow-x: hidden;
+      box-shadow: rgba(228, 228, 228, 0.2) 0px 5px 15px 0px;
+    }
+    .banner_cards:hover{
+      opacity: 0.8;
+    }
+  </style>
+  <body>
+    <div id="navbar">
+    <img src="images/logo/ct_logo.jpg" alt="logo">
+      <div class="prof_search">
+        <input type="text" placeholder="🔎 Search">
+        <button><img src="images/user.png" alt="user"> Sign In</button>
+      </div>      
+    </div>
+
+    <div id="video">
+      <img class="img_banner" src="images/Banner/banner_default.jpg" alt="" />
+      <iframe class="banner_video"        
+        src="https://www.youtube.com/embed/2Z-jaRlPovA?start=37&end=300&rel=0&showinfo=0&autoplay=1&mute=1&controls=0&modestbranding=1"></iframe>
+      <div id="details">
+        <img class="img_production" src="images/banner/ghost_writer_prod.webp" alt=""/>
+        <h5 class="h5_genre">Drama • Movies • Kids • Everything</h5>
+        <p class="p_desc">Enjoy star-studded, award winning series,films and more</p>
+        <button class="but_trial">Start Free Trial</button>      
+        <h6>7 day free, then ₹99.00/month</h6>
+        <h3>Featured</h3>
+      </div>
+
+      <div id="box">
+        <img class="banner_cards" onmouseover="toggle(id)" id="causeaway" src="images/cards/causeway_card.jpg" alt="">
+        <img class="banner_cards" onmouseover="toggle(id)" id="emancipation" src="images/cards/emancipation_card.jpg" alt="">
+        <img class="banner_cards" onmouseover="toggle(id)" id="ghost_writer" src="images/cards/ghost_writer_card.jpg" alt="">
+        <img class="banner_cards" onmouseover="toggle(id)" id="luck" src="images/cards/luck_card.jpg" alt="">
+        <img class="banner_cards" onmouseover="toggle(id)" id="selena" src="images/cards/selena_card.jpg" alt="">
+        <img class="banner_cards" onmouseover="toggle(id)" id="servant" src="images/cards/servant_card.jpg" alt="">
+
+      </div>
+    </div>
+  </body>
+</html>
+<script>
+  movie = [
+    {
+      id: 1,
+      title: "causeaway",
+      prod_img: "images/banner/causeaway_prod.webp",
+      ban_img: "images/banner/causeway.jpg",
+      source:
+        "https://www.youtube.com/embed/VojBOTd6Euo?start=10&end=300&rel=0&showinfo=0&autoplay=1&mute=1&controls=0&modestbranding=1",
+      genre: "Drama • 1 hr 34 min <span>U/A 16+</span>",
+      desc: "A soldier strggling back home forms an unexpected bond. Watch the new film.",
+    },
+    {
+      id: 2,
+      title: "emancipation",
+      prod_img: "images/banner/emancipation_prod.webp",
+      ban_img: "images/banner/emancipation.jpg",
+      source:
+        "https://www.youtube.com/embed/hGoNxmTDsJs?start=10&end=300&rel=0&showinfo=0&autoplay=1&mute=1&controls=0&modestbranding=1",
+      genre: "Drama • 2 hr 12 min <span>A</span>",
+      desc: "The new film premieres 9 Decmber. Add to Up Next.",
+    },
+    {
+      id: 3,
+      title: "ghost_writer",
+      prod_img: "images/banner/ghost_writer_prod.webp",
+      ban_img: "images/banner/ghost_writer.jpg",
+      source:
+        "https://www.youtube.com/embed/jc-Z6eSVaLM?start=10&end=300&rel=0&showinfo=0&autoplay=1&mute=1&controls=0&modestbranding=1",
+      genre: "Kids & Family<span>U/A 7+</span>",
+      desc: "Best friends embark on new adventures with beloved book characters. Watch all episodes.",
+    },
+    {
+      id: 4,
+      title: "luck",
+      prod_img: "images/banner/luck_prod.webp",
+      ban_img: "images/banner/luck.jpg",
+      source:
+        "https://www.youtube.com/embed/VoVQIvtqwB0?start=10&end=300&rel=0&showinfo=0&autoplay=1&mute=1&controls=0&modestbranding=1",
+      genre: "Animation • 1 hr 45 min <span>U</span>",
+      desc: "A magical adventure from the creative visionary behind Toy Story and Cars. Watch the film.",
+    },
+    {
+      id: 5,
+      title: "selena",
+      prod_img: "images/banner/selena_prod.webp",
+      ban_img: "images/banner/selena.jpg",
+      source:
+        "https://www.youtube.com/embed/oIwwBKeBUXY?start=10&end=300&rel=0&showinfo=0&autoplay=1&mute=1&controls=0&modestbranding=1",
+      genre: "Documentry • 1 hr 35 min <span>A</span>",
+      desc: "Follow Selena's six-year journey from darkness into a new light. Watch the new film.",
+    },
+    {
+      id: 6,
+      title: "servant",
+      prod_img: "images/banner/servant_prod.webp",
+      ban_img: "images/banner/servant.jpg",
+      source:
+        "https://www.youtube.com/embed/P77p8LSKvMc?start=10&end=300&rel=0&showinfo=0&autoplay=1&mute=1&controls=0&modestbranding=1",
+      genre: "Thriller <span>A</span>",
+      desc: "The chilling series returns for Season 4 on 13 January. Catch up now.",
+    },
+  ];
+  // hiding video on pageloads
+  document.querySelector(".banner_video").style.display = "none";
+
+  // displaying banner video after 3sec
+  setTimeout(delay_show_video, 3000);
+
+  function delay_show_video() {
+    // document.querySelector(".img_banner").src = "el.ban_img";
+    document.querySelector(".banner_video").style.display = "block";
+  }
+  // setTimeout(,2000);
+  function toggle(id) {
+    setTimeout(function () {
+      movie.forEach((el, i) => {
+        if (id == el.title) {
+          document.querySelector(".img_banner").src = el.ban_img;
+          document.querySelector(".banner_video").src = el.source;
+          document.querySelector(".img_production").src = el.prod_img;
+          document.querySelector(".h5_genre").innerHTML = el.genre;
+          document.querySelector(".p_desc").innerText = el.desc;
+
+          document.querySelector(".banner_video").style.display = "none";
+          setTimeout(delay_show_video, 3000);
+        }
+      });
+    },2000);
+  }
+</script>
