@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+</head>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+<link rel="stylesheet" href="login_signup_style.css">
+<link rel="shortcut icon" type="image/png" href="images/logo/cloudtv.ico"/>
+<body>
+
+    <div id="navbar">
+        <a href="index.html"><img src="images/logo/ct_logo.jpg" alt="logo"></a>    
+        <div class="prof_search">
+          <input type="text" placeholder="🔎 Search">
+          <h5 id="username"></h5>
+          <button id="sign_in" onclick="location.href = 'login.html';"><img src="images/user.png" alt="user"> Sign In</button>
+          <button id="sign_out"  onclick="sign_out()"><img src="images/user.png" alt="user"> Sign Out</button>
+        </div>      
+    </div>
+    <!-- <img id="logo" src="images/logo/cloud_tv_white_logo.png" alt=""> -->
+    
+    <form>
+        <h1>Enter Otp</h1>
+
+        <input id="otp_entered" style="text-align: center; " type="number" name="" id="">
+        <button id="otp_submit" >Submit OTP</button>
+    </form>
+</body>
+</html>
+<script>
+    obj=JSON.parse(localStorage.getItem("login_user")) || {};
+    if(obj.name==undefined){
+        document.querySelector("#sign_out").style.display="none";
+        document.querySelector("#username").style.display="none";
+    }else{
+        document.querySelector("#sign_in").style.display="none";
+        document.querySelector("#sign_out").style.display="block";
+        document.querySelector("#username").style.display="block";
+        document.querySelector("#username").innerText="Hello, "+obj.name;
+    }
+
+    sign_out=()=>{
+        obj={}
+        localStorage.setItem("login_user", JSON.stringify(obj));
+        window.location.href = "/index.html";
+    }
+
+    let date= new Date();
+    var year = date.getFullYear();
+    var mes = date.getMonth()+1;
+    var dia = date.getDate();
+    var today =dia+"-"+mes+"-"+year;
+    
+    let hours= date.getHours();
+    let mins= date.getMinutes();
+    let sec= date.getSeconds();
+    var time = hours+":"+mins+":"+sec;
+
+
+    document.querySelector("#otp_submit").addEventListener("click",function(){
+        otp=document.querySelector("#otp_entered").value;
+        if(otp=="1234"){
+            alert("Payment Successful");
+
+            let userData= JSON.parse(localStorage.getItem("users")) || [];
+            userData.forEach(element => {
+                if(element.first_name==obj.name){
+                    element.is_subscribed="Subscribed";
+                    obj.subscriber=element.is_subscribed;
+                    element.time=time;
+                    element.today=today;
+                    localStorage.setItem("login_user", JSON.stringify(obj));
+                    localStorage.setItem("users", JSON.stringify(userData));
+                }
+            });
+
+            window.location.href = "/index.html";
+        }else{
+            alert("Incorrect OTP");
+        }
+    })
+</script>

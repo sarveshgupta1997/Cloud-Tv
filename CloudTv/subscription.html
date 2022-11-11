@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+</head>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+<link rel="stylesheet" href="login_signup_style.css">
+<link rel="shortcut icon" type="image/png" href="images/logo/cloudtv.ico"/>
+<body>
+
+    <div id="navbar">
+        <a href="index.html"><img src="images/logo/ct_logo.jpg" alt="logo"></a>    
+        <div class="prof_search">
+          <input type="text" placeholder="🔎 Search">
+          <h5 id="username"></h5>
+          <button id="sign_in" onclick="location.href = 'login.html';"><img src="images/user.png" alt="user"> Sign In</button>
+          <button id="sign_out"  onclick="sign_out()"><img src="images/user.png" alt="user"> Sign Out</button>
+        </div>      
+    </div>
+    <!-- <img id="logo" src="images/logo/cloud_tv_white_logo.png" alt=""> -->
+    
+    <form action="">
+        <h1>Buy Subscription <span class="blue">₹99</span><span>/month</span></h1>
+        <label for="">Card Number</label>
+        <input type="number" id="card_num" placeholder="---- ---- ---- ----" size="16" required>
+
+        <label for="">CVV</label>
+        <input type="number" id="cvv" placeholder="---" min="" required>
+
+        <label for="">Expiry Date</label>
+        <input type="date" id="date" value="" required>
+
+        <label for="">Name on the card</label>
+        <input type="text" id="name" placeholder="Enter Name on the card" required>
+
+        <input type="submit" value="Pay Now">
+    </form>
+    <div id="otp_box">
+        <input type="number" name="" id="">
+        <button id="otp_submit">Submit OTP</button>
+    </div>
+</body>
+</html>
+<script>
+
+    obj=JSON.parse(localStorage.getItem("login_user")) || {};
+    if(obj.name==undefined){
+        document.querySelector("#sign_out").style.display="none";
+        document.querySelector("#username").style.display="none";
+    }else{
+        document.querySelector("#sign_in").style.display="none";
+        document.querySelector("#sign_out").style.display="block";
+        document.querySelector("#username").style.display="block";
+        document.querySelector("#username").innerText="Hello, "+obj.name;
+    }
+
+    sign_out=()=>{
+        obj={}
+        localStorage.setItem("login_user", JSON.stringify(obj));
+        window.location.href = "/index.html";
+    }
+
+
+    document.querySelector("form").addEventListener("submit",function(){
+        event.preventDefault();
+        let num= document.querySelector("#card_num").value;
+        let cvv= document.querySelector("#cvv").value;
+        let date= document.querySelector("#date").value;
+        let name= document.querySelector("#name").value;
+        let msg="";
+        if(num=="1234567890123456" && cvv=="123" && date=="1997-01-13" ){
+            alert("Otp sent on your mobile");
+            window.location.href = "/otp.html";
+        }if(num!=="1234567890123456"){
+            msg= "Wrong Creadentials- ";
+            msg+=" card number "
+        }if(cvv!=="123"){
+            msg+=" cvv "
+        }if(date!=="1997-01-13"){
+            msg+=" date "
+        }
+        if(msg!==""){
+            alert(msg);
+        }
+    })
+
+    
+</script>
