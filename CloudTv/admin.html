@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+</head>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+<link rel="stylesheet" href="login_signup_style.css">
+<link rel="shortcut icon" type="image/png" href="images/logo/cloudtv.ico"/>
+<body>
+
+    <div id="navbar">
+        <a href="index.html"><img src="images/logo/ct_logo.jpg" alt="logo"></a>    
+        <div class="prof_search">
+          <input type="text" placeholder="🔎 Search">
+          <h5 id="username">Hello Admin</h5>          
+          <button id="sign_out"  onclick="sign_out()"><img src="images/user.png" alt="user"> Sign Out</button>
+        </div>      
+    </div>
+
+    <form style="width:90%;" action="">
+        <h2>Admin Dashoard</h2><br>
+        <h5 for="">Select to see the Subscribed and Not Subscribed Users</h5>
+        <select name="" id="">
+            <option value="">All</option>
+            <option value="Subscribed">Subscribed</option>
+            <option value="Not Subscribed">Not Subscribed</option>
+        </select>
+        <table style="font-size: 15px;">
+            <thead>
+                <tr>
+                    <th>User's Name</th>
+                    <th>User's Email Address</th>
+                    <th>User's Phone Number</th>
+                    <th>User's Password</th>
+                    <th>Subscribed User</th>
+                    <th>Subscription Purchased Date</th>
+                    <th>Subscription Purchased Time</th>
+                    <th>Subscription Period</th>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+    </form>
+    
+    
+</body>
+</html>
+<script>
+
+let userData= JSON.parse(localStorage.getItem("users")) || [];
+
+
+displayTable=(data)=>{
+    document.querySelector("tbody").innerHTML="";
+    data.forEach((el,i)=>{
+        let name=document.createElement("td");
+        name.innerText=el.name;
+
+        let email=document.createElement("td");
+        email.innerText=el.email;
+
+        let phone=document.createElement("td");
+        phone.innerText=el.phone;
+
+        let pass=document.createElement("td");
+        pass.innerText=el.pass;
+
+        let is_subscribed=document.createElement("td");
+        is_subscribed.innerText=el.is_subscribed;
+        if(is_subscribed.innerText=="Subscribed"){
+            is_subscribed.setAttribute("class","green")
+        }else{            
+            is_subscribed.setAttribute("class","red")
+        }
+
+        let today=document.createElement("td");
+        today.innerText=el.today;
+        
+        let time=document.createElement("td");
+        time.innerText=el.time;
+
+        let subscription=document.createElement("td");
+        subscription.innerText="1 month";
+
+        let tr=document.createElement("tr");
+        tr.append(name,email,phone,pass,is_subscribed,today,time,subscription);
+
+        document.querySelector("tbody").append(tr);
+    })
+
+}
+
+displayTable(userData);
+
+document.querySelector("select").addEventListener("change",function(){
+    x=document.querySelector("select").value;
+    if(x!==""){
+        let filtered_Data=userData.filter((el)=>{;
+        return el.is_subscribed==x;
+        })
+        displayTable(filtered_Data);
+    }else{
+        displayTable(userData);
+    }
+    
+})
+
+</script>

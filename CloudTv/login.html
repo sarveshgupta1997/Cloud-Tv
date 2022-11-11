@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+</head>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+<link rel="stylesheet" href="login_signup_style.css">
+<link rel="shortcut icon" type="image/png" href="images/logo/cloudtv.ico"/>
+<body>
+
+    <div id="navbar">
+        <a href="index.html"><img src="images/logo/ct_logo.jpg" alt="logo"></a>    
+        <div class="prof_search">
+          <input type="text" placeholder="🔎 Search">
+          <button><img src="images/user.png" alt="user"> Sign In</button>
+        </div>      
+    </div>
+
+    <!-- <img id="logo" src="images/logo/cloud_tv_white_logo.png" alt=""> -->
+    <form action="">
+        <h2>Sign In</h2>
+        
+        <label for="">Email</label>
+        <input type="email" name="" id="email" placeholder="Enter email">
+        <span>
+            <label for="">Password</label>
+            <label for="">Forgot Password?</label>
+        </span>
+        <input type="password" name="" id="pass" placeholder="Enter password">
+        <i onclick="show_hide()" class="fa-solid fa-eye" id="eye"></i>
+        <!-- <input onclick="show_hide()" type="button" value="Show/Hide"> -->
+        
+        <input type="submit" value="SIGN IN">
+        <button><img src="https://sso.masaischool.com/google.svg" alt="">CONTINUE WITH GOOGLE</button>
+        <h3>Don't have an account? <a href="signup.html">Sign Up</a></h3>
+        <h3>Go to admin login? <a href="admin_login.html">Admin Login</a></h3>
+    </form>
+</body>
+</html>
+<script>
+    let userData= JSON.parse(localStorage.getItem("users")) || [];
+
+form=document.querySelector("form");
+form.addEventListener("submit", function(){
+    event.preventDefault();
+    let entered_pass= form.pass.value;
+    let entered_email= form.email.value;
+
+    if(entered_pass == "" || entered_email == ""){
+        alert("Please enter Email and Password both.");
+    }
+    else{
+        flag=false;
+        userData.forEach(element => {
+            if(entered_pass == element.pass && entered_email == element.email){
+                flag=true;
+                alert("Login Sucessful");
+                
+                obj={
+                    name:element.first_name,
+                    loged_in:true,
+                    subscriber:element.is_subscribed
+                }
+                localStorage.setItem("login_user", JSON.stringify(obj));
+
+                window.location.href = "/index.html";
+            }
+            else if(entered_pass == element.pass && entered_email !== element.email){
+                alert("Email does not match");
+                flag=true;
+            }
+            else if(entered_pass !== element.pass && entered_email == element.email){
+                alert("Password does not match");
+                flag=true;
+            }
+        });
+        if(!flag){
+            alert("Details does not match");
+        }
+        
+    }
+    
+});
+
+show_hide=()=>{
+    let x=document.querySelector("#pass");
+    x.type==="password" ? x.type="text" : x.type="password";
+    
+}
+</script>

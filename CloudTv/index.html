@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
+    <link rel="shortcut icon" type="image/png" href="images/logo/cloudtv.ico"/>
   </head>
   <style>
     * {
@@ -21,13 +22,13 @@
       top: 0;
       background-color: black;
       height: 50px;
-      z-index: 999 !important;
+      z-index: 20 !important;
       display: flex;
       justify-content: space-between;
       align-items: center;
       padding: 10px 40px;
     }
-    #navbar >img{
+    #navbar >a> img{
       height: 50px;
       object-fit: cover;
     }
@@ -46,14 +47,31 @@
     .prof_search img{
       height: 11px;
     }
-    .prof_search>button{
+    .prof_search{
+      display: flex;
+      justify-content: space-evenly;
+      align-items: center;
+    }
+    #username{
+      padding-left: 10px;
+      color: white;;
+    }
+    #star{
+      margin-left: 10px;
+      height: 20px;
+    }
+    .prof_search button{
       background-color: #007aff;
       color: white;
-      width: 95px;
-      padding: 5px 10px;
+      width: 105px;
+      padding: 5px 10px;      
+      margin-left: 10px;
       border-radius: 8px;
       font-size: 15px;
       letter-spacing: 0.05em;
+    }
+    .prof_search button:hover{
+      cursor: pointer;
     }
                                   /* Banner */
     #video {
@@ -63,21 +81,16 @@
     .img_banner,
     .banner_video {
       position: absolute;
-      width: 100vw;
+      width: 98.85vw;
       height: 130vh;
       z-index: 0;
     }
     .img_banner {
       object-fit: cover;
     }
-    .banner_video {
-      /* transition: 2s; */
-      /* opacity: 0; */
-      /* transition: opacity 5s linear; */
-    }
     #details {
       position: relative;
-      z-index: 10;
+      z-index: 1;
       height: 100%;
       padding-left: 40px;
       width: 300px;
@@ -140,15 +153,15 @@
     
     #box{
       position: relative;
-      width: 100%;
       margin: auto;
-      margin-top:-10px;
-      padding: 0px 40px;
+      margin-top:-10px;      
+      padding-bottom:100px;
+      padding: 0 40px 40px 40px;
       display: grid;
       grid-template-columns: repeat(6, 1fr);
       gap: 20px;
       background: linear-gradient(to bottom, rgba(255,192,203, 0) 0%, rgb(0, 0, 0) 10%, black 100%);
-      z-index: 1000;
+      z-index: 10;
     }
     .banner_cards{
       position: relative;
@@ -160,13 +173,22 @@
     .banner_cards:hover{
       opacity: 0.8;
     }
+    /* #accordian{
+      height:500px;
+    } */
+    #container{
+      position: relative;
+    }
   </style>
   <body>
     <div id="navbar">
-    <img src="images/logo/ct_logo.jpg" alt="logo">
+      <a href="index.html"><img src="images/logo/ct_logo.jpg" alt="logo"></a>    
       <div class="prof_search">
         <input type="text" placeholder="🔎 Search">
-        <button><img src="images/user.png" alt="user"> Sign In</button>
+        <h5 id="username"></h5>
+        <img id="star" src="images/star.png" alt="user">
+        <button id="sign_in" onclick="location.href = 'login.html';"><img src="images/user.png" alt="user"> Sign In</button>
+        <button id="sign_out"  onclick="sign_out()"><img src="images/user.png" alt="user"> Sign Out</button>
       </div>      
     </div>
 
@@ -178,7 +200,7 @@
         <img class="img_production" src="images/banner/ghost_writer_prod.webp" alt=""/>
         <h5 class="h5_genre">Drama • Movies • Kids • Everything</h5>
         <p class="p_desc">Enjoy star-studded, award winning series,films and more</p>
-        <button class="but_trial">Start Free Trial</button>      
+        <button onclick="banner_button_event()" class="but_trial">Start Free Trial</button>      
         <h6>7 day free, then ₹99.00/month</h6>
         <h3>Featured</h3>
       </div>
@@ -193,9 +215,68 @@
 
       </div>
     </div>
+
+
+    <div id="accordian">
+      <h1>Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima sequi temporibus id, quis totam ipsa praesentium beatae dolore laboriosam voluptatum ea tempore quod dicta impedit, modi quisquam voluptatem, cum excepturi eligendi! Sed sint expedita in, ad sit debitis repellendus. Numquam, alias nam neque ducimus voluptates aliquid nemo illo ad omnis?</h1>
+      
+      <h1>Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima sequi temporibus id, quis totam ipsa praesentium beatae dolore laboriosam voluptatum ea tempore quod dicta impedit, modi quisquam voluptatem, cum excepturi eligendi! Sed sint expedita in, ad sit debitis repellendus. Numquam, alias nam neque ducimus voluptates aliquid nemo illo ad omnis?</h1>
+      <h1>Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima sequi temporibus id, quis totam ipsa praesentium beatae dolore laboriosam voluptatum ea tempore quod dicta impedit, modi quisquam voluptatem, cum excepturi eligendi! Sed sint expedita in, ad sit debitis repellendus. Numquam, alias nam neque ducimus voluptates aliquid nemo illo ad omnis?</h1>
+      <h1>Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima sequi temporibus id, quis totam ipsa praesentium beatae dolore laboriosam voluptatum ea tempore quod dicta impedit, modi quisquam voluptatem, cum excepturi eligendi! Sed sint expedita in, ad sit debitis repellendus. Numquam, alias nam neque ducimus voluptates aliquid nemo illo ad omnis?</h1>
+      <h1>Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima sequi temporibus id, quis totam ipsa praesentium beatae dolore laboriosam voluptatum ea tempore quod dicta impedit, modi quisquam voluptatem, cum excepturi eligendi! Sed sint expedita in, ad sit debitis repellendus. Numquam, alias nam neque ducimus voluptates aliquid nemo illo ad omnis?</h1>
+      <h1>Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima sequi temporibus id, quis totam ipsa praesentium beatae dolore laboriosam voluptatum ea tempore quod dicta impedit, modi quisquam voluptatem, cum excepturi eligendi! Sed sint expedita in, ad sit debitis repellendus. Numquam, alias nam neque ducimus voluptates aliquid nemo illo ad omnis?</h1>
+      <h1>Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima sequi temporibus id, quis totam ipsa praesentium beatae dolore laboriosam voluptatum ea tempore quod dicta impedit, modi quisquam voluptatem, cum excepturi eligendi! Sed sint expedita in, ad sit debitis repellendus. Numquam, alias nam neque ducimus voluptates aliquid nemo illo ad omnis?</h1>
+      <h1>Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima sequi temporibus id, quis totam ipsa praesentium beatae dolore laboriosam voluptatum ea tempore quod dicta impedit, modi quisquam voluptatem, cum excepturi eligendi! Sed sint expedita in, ad sit debitis repellendus. Numquam, alias nam neque ducimus voluptates aliquid nemo illo ad omnis?</h1>
+    </div>
+    
+    <div id="container">
+      <!-- <div class="genre_box">
+        <h2>${category}</h2>
+        <div class="cards"></div>
+      </div> -->
+
+    </div>
+    
+
+
   </body>
 </html>
+
 <script>
+  obj=JSON.parse(localStorage.getItem("login_user")) || {};
+  if(obj.name==undefined){
+    document.querySelector("#sign_out").style.display="none";
+    document.querySelector("#username").style.display="none";
+    document.querySelector("#star").style.display="none";
+    go_to="/login.html";
+  }else{
+    if(obj.subscriber=="Subscribed"){
+      document.querySelector("#star").style.display="block";
+      document.querySelector(".but_trial").innerText="Watch Now";
+      go_to="/show.html";
+    }else{
+      document.querySelector("#star").style.display="none";
+      document.querySelector(".but_trial").innerText="Buy Subscription Now";
+      go_to="/subscription.html";
+    }
+    document.querySelector("#sign_in").style.display="none";
+    document.querySelector("#sign_out").style.display="block";
+    document.querySelector("#username").style.display="block";
+    document.querySelector("#username").innerText="Hello, "+obj.name;
+    
+  }
+
+  sign_out=()=>{
+    obj={}
+    localStorage.setItem("login_user", JSON.stringify(obj));
+    window.location.href = "/index.html";
+  }
+
+  banner_button_event=()=>{    
+    window.location.href = go_to;
+  }
+  
+  
   movie = [
     {
       id: 1,
@@ -285,4 +366,67 @@
       });
     },2000);
   }
+
+  // tmdb api keys
+  // let api_key = "9fdf44906b9c7ca76e83f98db3f01da9"
+  // let img_url = "https://image.tmdb.org/t/p/w500";
+  // let genres_list_http = "https://api.themoviedb.org/3/genre/movie/list?";
+  // let movie_genres_http = "https://api.themoviedb.org/3/discover/movie?";
+  // let original_img_url = "https://image.tmdb.org/t/p/original";
+  // let movie_detail_http = "https://api.themoviedb.org/3/movie";
+
+
+  async function get_data(){
+    try{
+      let res = await fetch("https://api.themoviedb.org/3/genre/movie/list?api_key=9fdf44906b9c7ca76e83f98db3f01da9");
+      let out = await res.json();
+      out.genres.forEach(item => {
+            fetchMoviesListByGenres(item.id, item.name);
+        })
+    }
+    catch(err){
+      alert(err);
+    }
+  }
+  get_data();
+  
+  rand_page=  Math.floor(Math.random() * 3) + 1;
+  const fetchMoviesListByGenres=(id, genres)=>{
+    fetch(`https://api.themoviedb.org/3/discover/movie?api_key=9fdf44906b9c7ca76e83f98db3f01da9&with_genres=${id}&page=${rand_page}`)
+      .then(res => res.json())
+      .then(data => {
+          makeCategoryElement(`${genres}`, data.results);
+          // console.log(`${genres}`, data.results);
+      })
+      .catch(err => console.log(err));
+  }
+  // container=document.querySelector('#container');
+  // makeCategoryElement=(category,data)=>{
+  //   // console.log(category,data)
+  //     container.innerHTML+=
+  //     `
+  //     <div class="genre_box">
+  //       <h2>${category} Movies</h2>
+  //       <div class="cards_container"  id="${category}"></div>
+  //     </div>
+  //     `
+  //     makeCards(category,data);
+  // }
+  // makeCards=(category,data)=>{    
+  //   cards_container=document.querySelector('#category');
+  //   data.forEach((el,i)=>{
+  //     cards_container.innerHTML+=
+  //     `
+  //     <div class="cards">
+  //       <img src="https://image.tmdb.org/t/p/w500${el.backdrop_path}">
+  //       <p class="movie_title">${el.title}</p>
+  //     </div>
+  //     `
+  //   })
+      
+    
+      
+  // }
+
+
 </script>

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+</head>
+<link rel="stylesheet" href="login_signup_style.css">
+<body>
+    <!-- <img id="logo" src="images/logo/cloud_tv_white_logo.png" alt=""> -->
+    <div id="navbar">
+        <a href="index.html"><img src="images/logo/ct_logo.jpg" alt="logo"></a>    
+        <div class="prof_search">
+          <input type="text" placeholder="🔎 Search">
+          <button><img src="images/user.png" alt="user"> Sign In</button>
+        </div>      
+        </div>
+    <form action="">
+        <h2>Sign Up</h2>
+        <label for="">Full name</label>
+        <input type="text" name="" id="name" placeholder="Enter your full name">
+        <label for="">Email</label>
+        <input type="email" name="" id="email" placeholder="Enter email">
+        <label for="">Phone</label>
+        <input type="number" pattern="[0-9]{10}" name="" id="phone" placeholder="Enter phone">
+        <label for="">Password</label>
+        <input type="password" name="" id="pass" placeholder="Enter password">
+        <h5>By signing up, I accept the Cloud TV <a href="">Terms of Service</a> and acknowledge the <a href="">Privacy Policy.</a></h5>
+        <input type="submit" value="SIGNUP">
+        <h3>Already have an account? <a href="login.html">Sign In</a></h3>
+    </form>
+</body>
+</html>
+<script>
+    let userData= JSON.parse(localStorage.getItem("users")) || [];
+    let flag=true;
+    form=document.querySelector("form");
+    form.addEventListener("submit", function(){
+        event.preventDefault();
+        
+        userData.forEach(element => {
+            if(form.email.value== element.email){
+                alert("User already exist, Kindly login");
+                flag=false;
+            }
+        });
+        first_name=form.name.value.split(" ");
+        first_name=first_name[0];
+
+        let obj={
+            first_name:first_name,
+            name:form.name.value,
+            email:form.email.value,
+            pass:form.pass.value,
+            phone:form.phone.value,
+            is_subscribed:"Not Subscribed",
+            time:"Not Subscribed",
+            today:"Not Subscribed"
+        }
+        if(obj.name=="" || obj.email=="" || obj.pass=="" || obj.phone==""){
+            alert("Please fill all the details");
+        }else if(flag){
+            userData.push(obj);
+            localStorage.setItem("users", JSON.stringify(userData));
+            alert("Sign Up sucessful, kindly login");
+            window.location.href = "/login.html";
+        }
+    })  
+</script>
