@@ -5,14 +5,15 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
 <link rel="stylesheet" href="login_signup_style.css">
 <link rel="shortcut icon" type="image/png" href="images/logo/cloudtv.ico"/>
+<title>Cloud TV</title>
 <body>
 
     <div id="navbar">
         <a href="index.html"><img src="images/logo/ct_logo.jpg" alt="logo"></a>    
         <div class="prof_search">
-          <input type="text" placeholder="🔎 Search">
+          <input type="text" disabled placeholder="🔎 Search">
           <h5 id="username">Hello Admin</h5>          
-          <button id="sign_out"  onclick="sign_out()"><img src="images/user.png" alt="user"> Sign Out</button>
+          <button id="sign_out"  onclick="location.href = 'index.html';"><img src="images/user.png" alt="user"> Sign Out</button>
         </div>      
     </div>
 
@@ -43,7 +44,16 @@
     </form>
     
     
-</body>
+    <div id="footer">
+        <p>Copyright © 2022 Cloud TV Inc. All Rights Reserved.</p>
+        <div class="footer_a">
+          <a href="#">Internet Service Terms</a>
+          <a href="#">Cloud TV & Privacy</a>
+          <a href="#">Cookie Warning</a>
+          <a href="#">Support</a>
+        </div>
+      </div>
+    </body>
 </html>
 <script>
 
