@@ -170,3 +170,26 @@ form select{
   margin: auto;
   width:20%;
 }
+
+#footer{
+  width: 95%;
+  margin: auto;
+  padding-top: 20px;
+}
+#footer p{
+  font-size: 12px;
+  color: grey;
+  padding: 5px;
+}
+.footer_a{
+  display: flex;
+}
+.footer_a a{
+  text-decoration: none;
+  font-size: 12px;
+  color: grey;
+  padding: 5px;
+}
+.footer_a a:not(:last-child){
+  border-right: 1.5px solid lightgrey;
+}

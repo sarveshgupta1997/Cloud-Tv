@@ -3,12 +3,13 @@
 <head>
 </head>
 <link rel="stylesheet" href="login_signup_style.css">
+<title>Cloud TV</title>
 <body>
     <!-- <img id="logo" src="images/logo/cloud_tv_white_logo.png" alt=""> -->
     <div id="navbar">
         <a href="index.html"><img src="images/logo/ct_logo.jpg" alt="logo"></a>    
         <div class="prof_search">
-          <input type="text" placeholder="🔎 Search">
+          <input type="text" disabled placeholder="🔎 Search">
           <button><img src="images/user.png" alt="user"> Sign In</button>
         </div>      
         </div>
@@ -26,7 +27,17 @@
         <input type="submit" value="SIGNUP">
         <h3>Already have an account? <a href="login.html">Sign In</a></h3>
     </form>
-</body>
+    
+    <div id="footer">
+        <p>Copyright © 2022 Cloud TV Inc. All Rights Reserved.</p>
+        <div class="footer_a">
+          <a href="#">Internet Service Terms</a>
+          <a href="#">Cloud TV & Privacy</a>
+          <a href="#">Cookie Warning</a>
+          <a href="#">Support</a>
+        </div>
+      </div>
+    </body>
 </html>
 <script>
     let userData= JSON.parse(localStorage.getItem("users")) || [];

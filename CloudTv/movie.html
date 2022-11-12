@@ -583,6 +583,7 @@
       makeCards2(category,data);
     }
   }
+  
   makeCards1=(id,data)=>{    
     cardsContainer=document.getElementById(id);
     for(let i=0;i<5;i++){
@@ -594,7 +595,7 @@
         }
       cardsContainer.innerHTML+=
       `
-      <div class="cards" onclick="save_movie_id_in_loc_strge_use_in_video_trailer_api_call_on_click_next_page(id)" id="${data[i].id}">
+      <div class="cards" onclick="location.href = '/${data[i].id}'">
         <img src="https://image.tmdb.org/t/p/w500${data[i].backdrop_path}">
         <p class="movie_title">${data[i].title}</p>
       </div>
@@ -612,53 +613,14 @@
         }
       cardsContainer.innerHTML+=
       `
-      <div class="cards" onclick="save_movie_id_in_loc_strge_use_in_video_trailer_api_call_on_click_next_page(id)" id="${data[i].id}">
+      <div class="cards" onclick="location.href = '/${data[i].id}'">
         <img src="https://image.tmdb.org/t/p/w500${data[i].backdrop_path}">
         <p class="movie_title">${data[i].title}</p>
       </div>
       `
     }
   }
-  save_movie_id_in_loc_strge_use_in_video_trailer_api_call_on_click_next_page=(id) => {
-    localStorage.setItem("movie_id",id);
-  }
-  // makeCards1=(id,data)=>{    
-  //   cardsContainer=document.getElementById(id);
-  //   for(let i=0;i<5;i++){
-  //     if (data[i].backdrop_path == null) {
-  //           data[i].backdrop_path = data[i].poster_path;
-  //           if (data[i].backdrop_path == null) {
-  //               return;
-  //           }
-  //       }
-  //     cardsContainer.innerHTML+=
-  //     `
-  //     <div class="cards" onclick="location.href = '/${data[i].id}'">
-  //       <img src="https://image.tmdb.org/t/p/w500${data[i].backdrop_path}">
-  //       <p class="movie_title">${data[i].title}</p>
-  //     </div>
-  //     `
-  //   }
-  // }
-  // makeCards2=(id,data)=>{    
-  //   cardsContainer=document.getElementById(id);
-  //   for(let i=0;i<4;i++){
-  //     if (data[i].backdrop_path == null) {
-  //           data[i].backdrop_path = data[i].poster_path;
-  //           if (data[i].backdrop_path == null) {
-  //               return;
-  //           }
-  //       }
-  //     cardsContainer.innerHTML+=
-  //     `
-  //     <div class="cards" onclick="location.href = '/${data[i].id}'">
-  //       <img src="https://image.tmdb.org/t/p/w500${data[i].backdrop_path}">
-  //       <p class="movie_title">${data[i].title}</p>
-  //     </div>
-  //     `
-  //   }
-  // }
-  
+
 // --------------------------------------     movies onn Search  -------------------------------------------------
 
   //            getting movies on search

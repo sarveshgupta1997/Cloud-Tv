@@ -1,16 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+</head>
+<body>
+        <iframe width="560" height="315" src="https://www.youtube.com/embed/Sa13L_4gfAQ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        <div class="trailer-container">
 
-<script>
-        let date= new Date();
-        var year = date.getFullYear();
-        var mes = date.getMonth()+1;
-        var dia = date.getDate();
-        var taareek =dia+"-"+mes+"-"+year;
+        </div>
+
         
-        let hours= date.getHours();
-        let mins= date.getMinutes();
-        let sec= date.getSeconds();
-        var time = hours+":"+mins+":"+sec;
+</body>
+</html>
+<script>
+           movie_id=505642;
+        fetch(`https://api.themoviedb.org/3/movie/${movie_id}/videos?api_key=9fdf44906b9c7ca76e83f98db3f01da9`)
+    .then(res => res.json())
+    .then(data => {
+        document.querySelector('iframe').src=`https://youtube.com/embed/${data.results[0].key}`;
+    })
 
-        // console.log(taareek,time);
+    
+//         fetch(`${movie_detail_http}${movie_id}/videos?` + new URLSearchParams({
+//     api_key: api_key
+// }))
+//         movie_id=505642;
+//         fetch(`https://api.themoviedb.org/3/movie/${movie_id}/videos?api_key=9fdf44906b9c7ca76e83f98db3f01da9`)
+//     .then(res => res.json())
+//     .then(data => {
+//         let trailerContainer = document.querySelector('.trailer-container');
+
+//             trailerContainer.innerHTML += `
+//         <iframe src="https://youtube.com/embed/${data.results[0].key}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+//         `;        
+//     })
 
 </script>
