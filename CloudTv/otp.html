@@ -70,8 +70,7 @@
     document.querySelector("#otp_submit").addEventListener("click",function(){
         otp=document.querySelector("#otp_entered").value;
         if(otp=="1234"){
-            window.location.href = "./index.html";
-
+            window.location.href = "/index.html";
             alert("Payment Successful");
 
             let userData= JSON.parse(localStorage.getItem("users")) || [];

@@ -6,7 +6,10 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Document</title>
 </head>
-<body>
+<body style="background-color: pink;">
+        <img style="width: 150px;" src="images/logo/cloudtv_tv.png" alt="">
+
+
         <iframe width="560" height="315" src="https://www.youtube.com/embed/Sa13L_4gfAQ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
         <div class="trailer-container">
 
@@ -16,7 +19,7 @@
 </body>
 </html>
 <script>
-           movie_id=505642;
+           movie_id=localStorage.getItem("movie_id");
         fetch(`https://api.themoviedb.org/3/movie/${movie_id}/videos?api_key=9fdf44906b9c7ca76e83f98db3f01da9`)
     .then(res => res.json())
     .then(data => {
