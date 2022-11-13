@@ -7,6 +7,30 @@
     <title>Cloud TV</title>
     <link rel="shortcut icon" type="image/png" href="images/logo/cloudtv.ico"/>
     <link rel="stylesheet" href="style.css">
+    <style>
+      #details {
+        height: 100%;
+        width: 400px;
+        padding-bottom: 30px;
+      }
+      #video #details p{
+        height: 120px;
+      }
+      #video .h3_title{
+        font-size: 24px;
+        padding-top: 260px;
+        line-height: 1.2em;
+      }
+      #video .but_trial{
+        width: 55%;
+      }
+      #video .h4_cast{
+        /* margin-top: 12px; */
+        font-size: 13px;
+        color:rgb(172, 172, 172);  
+        margin-bottom: 12px;      
+      }
+    </style>
   </head>
   <body>
     <div id="navbar">
@@ -24,10 +48,16 @@
       <img class="img_banner" src="images/Banner/banner_default.jpg" alt="" />
       <iframe class="banner_video"        
         src="https://www.youtube.com/embed/2Z-jaRlPovA?start=37&end=300&rel=0&showinfo=0&autoplay=1&mute=1&controls=0&modestbranding=1"></iframe>
+      
       <div id="details">
-        <img class="img_production" src="images/banner/ghost_writer_prod.webp" alt=""/>
+        <!-- <img class="img_production" src="images/banner/ghost_writer_prod.webp" alt=""/> -->
+        <h3 class="h3_title">Cloud TV Movies</h3>
         <h5 class="h5_genre">Drama • Movies • Kids • Everything</h5>
-        <p class="p_desc">Enjoy star-studded, award winning series,films and more</p>
+        <p class="p_desc">
+          Enjoy star-studded, award winning series,films and more.
+          Discover Horror, Adventure, Thriller, Horror, Kids and other movies filled with wonder and imagination on Cloud TV.
+        </p>
+        <h4 class="h4_cast">Starring: Best actors of all time with their cast, team and crew.</h4>
         <button onclick="banner_button_event()" class="but_trial">Start Free Trial</button>      
         <h6>7 day free, then ₹99.00/month</h6>
         <h3>Featured</h3>
@@ -110,6 +140,7 @@
       document.querySelector("#star").style.display="block";
       document.querySelector(".but_trial").innerText="Watch Now";
       document.querySelector("#bottom_trial_box").style.display="none";      
+      document.querySelector("#details h6").style.visibility="hidden";     
       go_to="/movie.html";
     }else{
       document.querySelector("#star").style.display="none";
@@ -133,6 +164,7 @@
     window.location.href = go_to;
   }
 
+
   // ---------- getting_saved_movie_id_from_loc_strge_to_use_in_VIDEO_TRAILER_api_call_on_click_next_page -------------
 
   movie_id=localStorage.getItem("movie_id");
@@ -143,8 +175,56 @@
       document.querySelector('iframe').src=`https://youtube.com/embed/${data.results[0].key}?start=10&end=300&rel=0&showinfo=0&autoplay=1&mute=1&controls=0&modestbranding=1`;
   })
   
+
+  // ---------- saved_movie_id_from_loc_strge_to_APPEND_BANNER_DATA_api_call_on_click_next_page -------------
+
+  fetch(`https://api.themoviedb.org/3/movie/${movie_id}?api_key=9fdf44906b9c7ca76e83f98db3f01da9`)  
+    .then(res => res.json())
+    .then(data => append_banner_data(data))
+
+    append_banner_data=(data)=>{
+      if (data.backdrop_path == null) {
+            data.backdrop_path = data.poster_path;
+            if (data.backdrop_path == null) {
+                return;
+            }
+      }
+      let gen_rl_date=data.release_date.split("-")[0] + " | ";
+      data.genres.forEach((el,i)=>{
+        data.genres.length>i+1 ? gen_rl_date+= el.name + ", " : gen_rl_date+= el.name + ". ";
+      })
+      if (data.adult == true) {
+        gen_rl_date.innerHTML += " | 18+";
+      }
+
+      document.querySelector(".h3_title").innerText = data.original_title;
+      document.querySelector(".img_banner").src = "https://image.tmdb.org/t/p/w500"+data.backdrop_path;  
+      document.querySelector(".h5_genre").innerHTML = gen_rl_date;
+      document.querySelector(".p_desc").innerText = data.overview.substring(0, 200) + '...';
+    }
+
+    // ---------- APPEND_BANNER_DATA_- CAST -------------
+
+  fetch(`https://api.themoviedb.org/3/movie/${movie_id}/credits?api_key=9fdf44906b9c7ca76e83f98db3f01da9`)  
+    .then(res => res.json())
+    .then(data => cast_data(data))
+
+    cast_data=(data)=>{
+      let casts_names  ="Starring: ";
+      if(data.cast==[]){
+        for(let i=0;i<5;i++){
+          i!==4 ? casts_names+= data.cast[i].name + ", " : casts_names+= data.cast[i].name + ". ";
+        }
+      }else{
+        for(let i=0;i<5;i++){
+          i!==4 ? casts_names+= data.crew[i].name + ", " : casts_names+= data.crew[i].name + ". ";
+        }
+      }
+      document.querySelector(".h4_cast").innerText = casts_names;
+    }
+    
   
-  // --- getting_saved_movie_id_from_loc_strge_to_get_RECOMMENDED_MOVIES_api_call_on_click_next_page ------
+  // --- saved_movie_id_from_loc_strge_to_get_RECOMMENDED_MOVIES_api_call_on_click_next_page ------
   
   fetch(`https://api.themoviedb.org/3/movie/${movie_id}/recommendations?api_key=9fdf44906b9c7ca76e83f98db3f01da9`)  
     .then(res => res.json())
@@ -182,63 +262,75 @@
     {
       id: 1,
       title: "emancipation",
+      full_name:"Emancipation",
       prod_img: "images/banner/emancipation_prod.webp",
       ban_img: "images/banner/emancipation.jpg",
       source:
         "https://www.youtube.com/embed/hGoNxmTDsJs?start=10&end=300&rel=0&showinfo=0&autoplay=1&mute=1&controls=0&modestbranding=1",
-      genre: "Drama • 2 hr 12 min <span>A</span>",
-      desc: "The new film premieres 9 Decmber. Add to Up Next.",
+      genre: "2022 | Thriller, History, Drama.",
+      desc: "Inspired by the gripping true story of a man who would do anything for his family—and for freedom. When Peter, an enslaved man, risks his life to escape and return to his family, he embarks on a peril...",
+      cast_names: "Starring: Will Smith, Ben Foster, Charmaine Bingwa, Steven Ogg, Gilbert Owuor."
     },
     {
       id: 2,
       title: "blush",
+      full_name:"Blush",
       prod_img: "images/banner/blush_prod.webp",
       ban_img: "images/banner/blush.jpg",
       source:
         "https://www.youtube.com/embed/sTz__zyOhds?start=10&end=300&rel=0&showinfo=0&autoplay=1&mute=1&controls=0&modestbranding=1",
-      genre: "Short Films • 10 min <span>U/A 7+</span>",
-      desc: "A horticulturalist-astronaut crashes onto a desolate planet. Watch the new film.",
+      genre: "2021 | Animation, Science Fiction, Family.",
+      desc: "When a horticulturalist-astronaut crashes onto a desolate planet, he encounters an ethereal visitor and discovers the joy of building a new life—realizing the universe has delivered something astonish...",
+      cast_names: "Starring: John Lasseter, Shannon Mills, Dana Goldberg, David Ellison, Tim Mertens."
     },
     
     {
       id: 3,
       title: "causeaway",
+      full_name:"Causeaway",
       prod_img: "images/banner/causeaway_prod.webp",
       ban_img: "images/banner/causeway.jpg",
       source:
         "https://www.youtube.com/embed/VojBOTd6Euo?start=10&end=300&rel=0&showinfo=0&autoplay=1&mute=1&controls=0&modestbranding=1",
-      genre: "Drama • 1 hr 34 min <span>U/A 16+</span>",
-      desc: "A soldier strggling back home forms an unexpected bond. Watch the new film.",
+      genre: "2022 | Drama.",
+      desc: "A US soldier suffers a traumatic brain injury while fighting in Afghanistan and struggles to adjust to life back home in New Orleans. When she meets local mechanic James, the pair begin to forge an un...",
+      cast_names: "Starring: Jennifer Lawrence, Brian Tyree Henry, Linda Emond, Jayne Houdyshell, Stephen McKinley Henderson."
     },
     {
       id: 4,
       title: "luck",
+      full_name:"Luck",
       prod_img: "images/banner/luck_prod.webp",
       ban_img: "images/banner/luck.jpg",
       source:
         "https://www.youtube.com/embed/VoVQIvtqwB0?start=10&end=300&rel=0&showinfo=0&autoplay=1&mute=1&controls=0&modestbranding=1",
-      genre: "Animation • 1 hr 45 min <span>U</span>",
-      desc: "A magical adventure from the creative visionary behind Toy Story and Cars. Watch the film.",
+      genre: "2022 | Animation, Adventure, Comedy, Fantasy.",
+      desc: "Suddenly finding herself in the never-before-seen Land of Luck, the unluckiest person in the world must unite with the magical creatures there to turn her luck around....",
+      cast_names: "Starring: Eva Noblezada, Simon Pegg, Jane Fonda, Whoopi Goldberg, Flula Borg."
     },
     {
       id: 5,
       title: "selena",
+      full_name:"Selena Gomez: My Mind & Me",
       prod_img: "images/banner/selena_prod.webp",
       ban_img: "images/banner/selena.jpg",
       source:
         "https://www.youtube.com/embed/oIwwBKeBUXY?start=10&end=300&rel=0&showinfo=0&autoplay=1&mute=1&controls=0&modestbranding=1",
-      genre: "Documentry • 1 hr 35 min <span>A</span>",
-      desc: "Follow Selena's six-year journey from darkness into a new light. Watch the new film.",
+      genre: "2022 | Documentary, Music.",
+      desc: "After years in the limelight, Selena Gomez achieves unimaginable stardom. But just as she reaches a new peak, an unexpected turn pulls her into darkness. This uniquely raw and intimate documentary spa...",
+      cast_names: "Starring: Alek Keshishian, Alek Keshishian, Aleen Keshishian, Stephanie Meurer, Katherine LeBlond."
     },
     {
       id: 6,
       title: "greyhound",
+      full_name:"Greyhound",
       prod_img: "images/banner/greyhound_prod.webp",
       ban_img: "images/banner/greyhound.jpg",
       source:
         "https://www.youtube.com/embed/eyzxu26-Wqk?start=10&end=300&rel=0&showinfo=0&autoplay=1&mute=1&controls=0&modestbranding=1",
-      genre: "Action • 1 hr 31 min <span>13+ A</span>",
-      desc: "A thrilling WWII story inspired by actual events. Catch up now.",
+      genre: "2019 | Drama, War, History.",
+      desc: "WWII drama from film-maker Christopher Forbes which follows American fighter pilots on a perilous mission into the skies of enemy territory....",
+      cast_names: "Starring: Barry W. Jerald Jr., Catherine Jerald, Stephen Gilliam, Jezibell Anat, Corbin Rivers."
     },
   ];
   // hiding video on pageloads
@@ -252,16 +344,23 @@
     document.querySelector(".banner_video").style.display = "block";
   }
   
-  // --------------------------------------     Banner onhover Togle video
+  // --------------------------------------     Banner onhover Toggle video
+  
+  // document.querySelector(".img_production").style.display = "none";
+
   function toggle(id) {
+    // document.querySelector(".h3_title").style.display = "none";
+    // document.querySelector(".img_production").style.display = "block";
     setTimeout(function () {
       movie.forEach((el, i) => {
         if (id == el.title) {
           document.querySelector(".img_banner").src = el.ban_img;
-          document.querySelector(".banner_video").src = el.source;
-          document.querySelector(".img_production").src = el.prod_img;
+          // document.querySelector(".img_production").src = el.prod_img;
           document.querySelector(".h5_genre").innerHTML = el.genre;
+          document.querySelector(".h3_title").innerHTML = el.full_name;
           document.querySelector(".p_desc").innerText = el.desc;
+          document.querySelector(".h4_cast").innerText = el.cast_names;
+          document.querySelector(".banner_video").src = el.source;
 
           document.querySelector(".banner_video").style.display = "none";
           setTimeout(delay_show_video, 3000);
@@ -336,7 +435,7 @@
         }
       cardsContainer.innerHTML+=
       `
-      <div class="cards" onclick="save_movie_id_in_loc_strge(id)"${data[i].id}">
+      <div class="cards" onclick="save_movie_id_in_loc_strge(id)" id=${data[i].id}">
         <img src="https://image.tmdb.org/t/p/w500${data[i].backdrop_path}">
         <p class="movie_title">${data[i].title}</p>
       </div>
@@ -354,7 +453,7 @@
         }
       cardsContainer.innerHTML+=
       `
-      <div class="cards" onclick="save_movie_id_in_loc_strge(id)"${data[i].id}">
+      <div class="cards" onclick="save_movie_id_in_loc_strge(id)" id=${data[i].id}">
         <img src="https://image.tmdb.org/t/p/w500${data[i].backdrop_path}">
         <p class="movie_title">${data[i].title}</p>
       </div>
@@ -377,42 +476,42 @@
     movie_searched=document.querySelector("#search").value;
     
     // toggle video if searching- hide, and if not searhing - show
-    if(search_movie==""){
+    if(movie_searched==""){
       document.querySelector("#video").style.display="block";
       document.querySelector("#container_search").style.display="none";
     }else{
       document.querySelector("#video").style.display="none";
       document.querySelector("#container_search").style.display="block";
-    }
 
-    fetch(`https://api.themoviedb.org/3/search/movie?api_key=9fdf44906b9c7ca76e83f98db3f01da9&page=1&query=${movie_searched}`)  
-    .then(res => res.json())
-    .then(data => displayDataSearch(data));
+      fetch(`https://api.themoviedb.org/3/search/movie?api_key=9fdf44906b9c7ca76e83f98db3f01da9&page=1&query=${movie_searched}`)  
+      .then(res => res.json())
+      .then(data => displayDataSearch(data));
 
-    displayDataSearch=(data)=>{
-        cardsContainer=document.querySelector("#container_search .cards_container_five");
-        cardsContainer.innerHTML="";
-        let count=0;
-        data.results.forEach((el,i)=>{
+      displayDataSearch=(data)=>{
+          cardsContainer=document.querySelector("#container_search .cards_container_five");
+          cardsContainer.innerHTML="";
+          let count=0;
+          data.results.forEach((el,i)=>{
             count++;
             if(count>15){
-                return false;
+              return false;
             }
             if (el.backdrop_path == null) {
-                el.backdrop_path = el.poster_path;
-                if (el.backdrop_path == null) {
-                    return;
-                }
+              el.backdrop_path = el.poster_path;
+              if (el.backdrop_path == null) {
+                return;
+              }
             }
 
-        cardsContainer.innerHTML+=
-        `
-        <div class="cards" onclick="save_movie_id_in_loc_strge(id)" id="${el.id}">
-            <img src="https://image.tmdb.org/t/p/w500${el.backdrop_path}">
-            <p class="movie_title">${el.title}</p>
-        </div>
-        `
-        })
+            cardsContainer.innerHTML+=
+            `
+            <div class="cards" onclick="save_movie_id_in_loc_strge(id)" id="${el.id}">
+                <img src="https://image.tmdb.org/t/p/w500${el.backdrop_path}">
+                <p class="movie_title">${el.title}</p>
+            </div>
+            `
+          })
+      }
     }
   }
 

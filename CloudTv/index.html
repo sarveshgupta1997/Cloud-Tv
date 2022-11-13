@@ -109,7 +109,8 @@
     if(obj.subscriber=="Subscribed"){
       document.querySelector("#star").style.display="block";
       document.querySelector(".but_trial").innerText="Watch Now";
-      document.querySelector("#bottom_trial_box").style.display="none";      
+      document.querySelector("#bottom_trial_box").style.display="none";     
+      document.querySelector("#details h6").style.visibility="hidden";        
       go_to="/movie.html";
     }else{
       document.querySelector("#star").style.display="none";
@@ -354,42 +355,44 @@
     movie_searched=document.querySelector("#search").value;
     
     // toggle video if searching- hide, and if not searhing - show
-    if(search_movie==""){
+    if(movie_searched==""){
       document.querySelector("#video").style.display="block";
       document.querySelector("#container_search").style.display="none";
     }else{
       document.querySelector("#video").style.display="none";
       document.querySelector("#container_search").style.display="block";
-    }
 
-    fetch(`https://api.themoviedb.org/3/search/movie?api_key=9fdf44906b9c7ca76e83f98db3f01da9&page=1&query=${movie_searched}`)  
-    .then(res => res.json())
-    .then(data => displayDataSearch(data));
+      fetch(`https://api.themoviedb.org/3/search/movie?api_key=9fdf44906b9c7ca76e83f98db3f01da9&page=1&query=${movie_searched}`)  
+      .then(res => res.json())
+      .then(data => displayDataSearch(data));
 
-    displayDataSearch=(data)=>{
-        cardsContainer=document.querySelector("#container_search .cards_container_five");
-        cardsContainer.innerHTML="";
-        let count=0;
-        data.results.forEach((el,i)=>{
+      displayDataSearch=(data)=>{
+          cardsContainer=document.querySelector("#container_search .cards_container_five");
+          cardsContainer.innerHTML="";
+          let count=0;
+          data.results.forEach((el,i)=>{
             count++;
             if(count>15){
-                return false;
+              return false;
             }
             if (el.backdrop_path == null) {
-                el.backdrop_path = el.poster_path;
-                if (el.backdrop_path == null) {
-                    return;
-                }
+              el.backdrop_path = el.poster_path;
+              if (el.backdrop_path == null) {
+                return;
+              }
             }
 
-        cardsContainer.innerHTML+=
-        `
-        <div class="cards" onclick="save_movie_id_in_loc_strge(id)"(id)" id="${el.id}">
-            <img src="https://image.tmdb.org/t/p/w500${el.backdrop_path}">
-            <p class="movie_title">${el.title}</p>
-        </div>
-        `
-        })
+            cardsContainer.innerHTML+=
+            `
+            <div class="cards" onclick="save_movie_id_in_loc_strge(id)" id="${el.id}">
+                <img src="https://image.tmdb.org/t/p/w500${el.backdrop_path}">
+                <p class="movie_title">${el.title}</p>
+            </div>
+            `
+          })
+      }
     }
   }
+
+
 </script>
