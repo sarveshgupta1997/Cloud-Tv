@@ -90,7 +90,7 @@ displayTable=(data)=>{
         time.innerText=el.time;
 
         let subscription=document.createElement("td");
-        subscription.innerText="1 month";
+        subscription.innerText=el.subscription_period;
 
         let tr=document.createElement("tr");
         tr.append(name,email,phone,pass,is_subscribed,today,time,subscription);
