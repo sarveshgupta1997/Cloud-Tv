@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cloud TV</title>
+    <link rel="shortcut icon" type="image/png" href="images/logo/cloudtv.ico"/>
+    <link rel="stylesheet" href="style.css">
+    <style>
+    </style>
+  </head>
+  <body>
+    <div id="navbar">
+      <a href="index.html"><img src="images/logo/ct_logo.jpg" alt="logo"></a>    
+      <div class="prof_search">
+        <input id="search" oninput="search_movie()" type="text" placeholder="🔎 Search">
+        <h5 id="username"></h5>
+        <img id="star" src="images/star.png" alt="user">
+        <button id="sign_in" onclick="location.href = 'login.html';"><img src="images/user.png" alt="user"> Sign In</button>
+        <button id="sign_out"  onclick="sign_out()"><img src="images/user.png" alt="user"> Sign Out</button>
+      </div>      
+    </div>
+    
+    <div id="container_search">
+      <div class="genre_box">
+        <h2>Searched Movies</h2>
+        <div class="cards_container_five">
+        </div>
+      </div>  
+    </div>
+    
+    <div id="container_genre_all_movies">
+      <div class="genre_box">
+        <h2>More Like This</h2>
+        <div class="cards_container_four">
+        </div>
+      </div> 
+    </div>
+
+    
+
+    <div id="footer">
+      <p>Copyright © 2022 Cloud TV Inc. All Rights Reserved.</p>
+      <div class="footer_a">
+        <a href="#">Internet Service Terms</a>
+        <a href="#">Cloud TV & Privacy</a>
+        <a href="#">Cookie Warning</a>
+        <a href="#">Support</a>
+      </div>
+    </div>
+
+    <div id="bottom_trial_box">
+        <div class="trial_box_left">
+          <h3>All Cloud TV Originals.</h3>
+          <p>Start watching with 7 days free. Or 3 months free when you pass unit 4 in Masai School.</p>
+        </div>
+        <div class="trial_box_right">
+          <button onclick="banner_button_event()" class="but_trial">Start Free Trial</button>      
+          <h6>7 day free, then ₹99.00/month</h6>
+        </div>
+    </div>
+  </body>
+</html>
+
+<script>
+  obj=JSON.parse(localStorage.getItem("login_user")) || {};
+  if(obj.name==undefined){
+    document.querySelector("#sign_out").style.display="none";
+    document.querySelector("#username").style.display="none";
+    document.querySelector("#star").style.display="none";
+    banner_button_event=()=>{    
+      window.location.href = "/login.html";
+    }
+    
+  }else{
+    if(obj.subscriber=="Subscribed"){
+      document.querySelector("#star").style.display="block";
+      document.querySelector(".but_trial").innerText="Watch Now";
+      document.querySelector("#bottom_trial_box").style.display="none";    
+    }else{
+      document.querySelector("#star").style.display="none";
+      document.querySelector(".but_trial").innerText="Buy Subscription Now";
+      document.querySelector("#bottom_trial_box button").innerText="Buy Subscription Now";
+      banner_button_event=()=>{    
+        window.location.href = "/subscription.html";
+      }  
+    }
+    document.querySelector("#sign_in").style.display="none";
+    document.querySelector("#sign_out").style.display="block";
+    document.querySelector("#username").style.display="block";
+    document.querySelector("#username").innerText="Hello, "+obj.name;
+  }
+
+  sign_out=()=>{
+    obj={}
+    localStorage.setItem("login_user", JSON.stringify(obj));
+    window.location.href = "/index.html";
+  }
+
+  
+// ---------- getting_saved_Genre_id_from_loc_strge_to_show genre movies -------------
+
+  genre_id=localStorage.getItem("genre_id");
+  genre_name=localStorage.getItem("genre_name");
+  
+  document.querySelector("#container_genre_all_movies h2").innerText= genre_name+" Movies";
+
+  rand_page=  Math.floor(Math.random() * 3) + 1;
+    fetch(`https://api.themoviedb.org/3/discover/movie?api_key=9fdf44906b9c7ca76e83f98db3f01da9&with_genres=${genre_id}&page=${rand_page}`)
+      .then(res => res.json())
+      .then(data => displayDataGenre(data));
+
+    displayDataGenre=(data)=>{
+    cardsContainer=document.querySelector("#container_genre_all_movies .cards_container_four");
+    cardsContainer.innerHTML="";
+    
+    data.results.forEach((el,i)=>{
+        if (el.backdrop_path == null) {
+            el.backdrop_path = el.poster_path;
+            if (el.backdrop_path == null) {
+                return;
+            }
+        }
+
+      cardsContainer.innerHTML+=
+      `
+      <div class="cards" onclick="save_movie_id_in_loc_strge(id)" id="${el.id}">
+        <img src="https://image.tmdb.org/t/p/w500${el.backdrop_path}">
+        <p class="movie_title">${el.title}</p>
+      </div>
+      `
+    })
+  }
+
+
+
+  save_movie_id_in_loc_strge=(id) => {
+    localStorage.setItem("movie_id",id);
+    window.open('movie.html','_blank');
+  }
+
+  
+// --------------------------------------     movies on Search  -------------------------
+
+  //            getting movies on search
+  document.querySelector("#container_search").style.display="none";
+
+  search_movie=()=>{
+    movie_searched=document.querySelector("#search").value;
+    
+    if(movie_searched==""){
+      document.querySelector("#container_search").style.display="none";
+    }else{
+      document.querySelector("#container_search").style.display="block";
+
+      fetch(`https://api.themoviedb.org/3/search/movie?api_key=9fdf44906b9c7ca76e83f98db3f01da9&page=1&query=${movie_searched}`)  
+      .then(res => res.json())
+      .then(data => displayDataSearch(data));
+
+      displayDataSearch=(data)=>{
+          cardsContainer=document.querySelector("#container_search .cards_container_five");
+          cardsContainer.innerHTML="";
+          let count=0;
+          data.results.forEach((el,i)=>{
+            count++;
+            if(count>15){
+              return false;
+            }
+            if (el.backdrop_path == null) {
+              el.backdrop_path = el.poster_path;
+              if (el.backdrop_path == null) {
+                return;
+              }
+            }
+
+            cardsContainer.innerHTML+=
+            `
+            <div class="cards" onclick="save_movie_id_in_loc_strge(id)" id="${el.id}">
+                <img src="https://image.tmdb.org/t/p/w500${el.backdrop_path}">
+                <p class="movie_title">${el.title}</p>
+            </div>
+            `
+          })
+      }
+    }
+  }
+
+  
+</script>
+
