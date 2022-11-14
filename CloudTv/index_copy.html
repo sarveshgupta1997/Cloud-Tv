@@ -6,312 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Cloud TV</title>
     <link rel="shortcut icon" type="image/png" href="images/logo/cloudtv.ico"/>
+    <link rel="stylesheet" href="style.css">
   </head>
-  <style>
-    body{
-      /* background-color: antiquewhite; */
-      /* background-color: #fff8df; */
-      background-color: white;
-    }
-    * {
-      padding: 0;
-      margin: 0;
-      font-family: cursive;
-      line-break: loose;
-      letter-spacing: 0.01em; 
-    }
-                                           /* Navbarar */
-    #navbar {
-      position: sticky;
-      top: 0;
-      background-color: black;
-      height: 50px;
-      z-index: 20 !important;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 10px 40px;
-    }
-    #navbar >a> img{
-      height: 50px;
-      object-fit: cover;
-    }
-    .prof_search>input{
-      background-color: black;
-      color: rgb(187, 187, 187);
-      width: 150px;
-      border:1px solid white;
-      padding: 4px 10px;
-      border-radius: 4px;
-      font-size: 15px;
-    }
-    /* .prof_search>input::placeholder{
-      color: rgb(187, 187, 187);
-    } */ 
-    .prof_search img{
-      height: 11px;
-    }
-    .prof_search{
-      display: flex;
-      justify-content: space-evenly;
-      align-items: center;
-    }
-    #username{
-      padding-left: 10px;
-      color: white;;
-    }
-    #star{
-      margin-left: 10px;
-      height: 20px;
-    }
-    .prof_search button{
-      background-color: #007aff;
-      color: white;
-      width: 105px;
-      padding: 5px 13px;      
-      margin-left: 10px;
-      border-radius: 8px;
-      font-size: 13px;
-      letter-spacing: 0.05em;
-    }
-    .prof_search button:hover{
-      cursor: pointer;
-    }
-                                          /* Banner */
-    #video {
-      margin-top: -120px;
-      /* background: linear-gradient(to left, rgba(255,192,203, 0) 50%, gray 60%, black 100%); */
-    }
-    .img_banner,
-    .banner_video {
-      position: absolute;
-      width: 98.85vw;
-      height: 130vh;
-      z-index: 0;
-    }
-    .img_banner {
-      object-fit: cover;
-    }
-    #details {
-      position: relative;
-      z-index: 1;
-      height: 100%;
-      padding-left: 40px;
-      width: 300px;
-      background: linear-gradient(to left, rgba(255,192,203, 0) 0%, black 100%);
-      line-height: 1.4em;      
-      padding-bottom: 30px;
-    }
-    #video .img_production,
-    #video .h5_genre,
-    #video .p_desc,
-    #video .but_trial,
-    #video h6,
-    #video h3,
-    #video .chnge {
-      position: relative;
-    }
-    .img_production {
-      height: 45px;
-      object-fit: cover;
-      margin-top: 400px;
-    }
-    #video .h5_genre{
-      margin-top: 12px;
-      font-size: 12px;
-      color:rgb(206, 206, 206);
-    }
-    #video .h5_genre span{
-      font-size: 13px;
-      color:rgb(180, 180, 180);
-    }
-    #video .p_desc{
-      margin-top: 12px;
-      font-size: 16px;
-      color:rgb(216, 216, 216);
-    }
-    #video .but_trial{
-      width: 75%;
-      margin-top: 12px;
-      color: black;
-      background-color: white;
-      border: none;
-      border-radius: 5px;
-      padding: 10px 12px;
-      font-size: 15px;
-      font-weight: bold;
-      box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
-    }
-    #video h6{
-      margin-top: 7px;
-      font-size: 12px;
-      color:rgb(158, 158, 158);
-      margin-left: 18px;
-    }
-    #video h3{
-      margin-top: 32px;
-      font-size: 22px;
-      color:rgb(216, 216, 216);
-    }
-    
-    #box{
-      position: relative;
-      margin: auto;
-      margin-top:-10px;      
-      padding-bottom:100px;
-      padding: 0 40px 40px 40px;
-      display: grid;
-      grid-template-columns: repeat(6, 1fr);
-      gap: 20px;
-      background: linear-gradient(to bottom, rgba(255,192,203, 0) 0%, rgb(0, 0, 0) 10%, black 100%);
-      z-index: 10;
-    }
-    .banner_cards{
-      position: relative;
-      width: 100%;
-      border-radius: 10px;
-      overflow-x: hidden;
-      box-shadow: rgba(228, 228, 228, 0.2) 0px 5px 15px 0px;
-    }
-    .banner_cards:hover{
-      opacity: 0.8;
-    }
-    /* #accordian{
-      height:500px;
-    } */
-    /* #container{
-      position: relative;
-    } */
-
-                                           /* Genre Movies */
-    .genre_box{
-      width: 95%;
-      margin: auto;
-      border-bottom: 1.5px solid lightgrey;
-      padding: 20px 0px 20px 0px;
-    }
-    .cards_container_four,.cards_container_five{
-      width:100%;
-      margin: auto;
-      display: grid;
-      gap:20px;
-      padding: 15px 0px;
-    }
-    .cards_container_five{
-      grid-template-columns: repeat(5,1fr);
-    }
-    .cards_container_four{
-      grid-template-columns: repeat(4,1fr);
-    }
-    .cards{
-      width: 100%;      
-    }
-    .cards img{
-      width: 100%;
-      object-fit: cover;
-      border-radius: 12px;
-      box-sizing: border-box;
-      box-shadow: 0 4px 7px rgb(0 0 0 / 25%);
-      margin-bottom: 8px;
-      overflow-y: hidden;
-    }
-    .cards_container_four img{
-      height:172px;  
-    }
-    .cards_container_five img{
-      height:135px;  
-    }
-    .genre_box h2{
-      font-size: 19px;
-      letter-spacing: 0em;
-      padding-bottom: 4px;
-    }
-    .genre_box h2+p{
-      font-size: 15px;
-      letter-spacing: 0.01em;
-      padding-bottom: 6px;
-      color: rgb(87, 87, 87);
-    }
-    .cards p{
-      text-align: center;
-      font-size: 16px;
-      color: darkslategray;
-    }
-    .cards img:hover {
-      opacity:0.9;
-      box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
-    }
-
-                                           /* Footer */
-    #footer{
-      width: 95%;
-      margin: auto;
-      padding-top: 20px;
-    }
-    #footer p{
-      font-size: 12px;
-      color: grey;
-      padding: 5px;
-    }
-    .footer_a{
-      display: flex;
-    }
-    .footer_a a{
-      text-decoration: none;
-      font-size: 12px;
-      color: grey;
-      padding: 5px;
-    }
-    .footer_a a:not(:last-child){
-      border-right: 1.5px solid lightgrey;
-    }
-
-                                           /* Bottom Trial Box */
-    #bottom_trial_box{
-      position: sticky;
-      bottom: 0px;
-      z-index: 30;
-      background-color: #262629;
-      padding: 10px 30px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
-    }
-    .trial_box_left h3{
-      font-size: 16px;
-      color: #EEEEEE;
-    }
-    .trial_box_left p{
-      font-size: 14px;
-      margin-top: 3px;
-      color:rgb(158, 158, 158);  
-    }
-    .trial_box_right{
-      width: 18%;
-    }
-    .trial_box_right button{  
-      display: block;
-      margin: auto; 
-      width: 90%;
-      margin-top: 12px;
-      color: black;
-      background-color: white;
-      border: none;
-      border-radius: 5px;
-      padding: 10px 12px;
-      font-size: 14px;
-      font-weight: bold;
-      box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
-    }
-    .trial_box_right h6{
-      margin-top: 7px;
-      font-size: 10px;
-      color:rgb(158, 158, 158);   
-      text-align: center;
-    }
-
-  </style>
   <body>
     <div id="navbar">
       <a href="index.html"><img src="images/logo/ct_logo.jpg" alt="logo"></a>    
@@ -338,28 +34,27 @@
       </div>
 
       <div id="box">
-        <img class="banner_cards" onmouseover="toggle(id)" id="causeaway" src="images/cards/causeway_card.jpg" alt="">
-        <img class="banner_cards" onmouseover="toggle(id)" id="emancipation" src="images/cards/emancipation_card.jpg" alt="">
-        <img class="banner_cards" onmouseover="toggle(id)" id="ghost_writer" src="images/cards/ghost_writer_card.jpg" alt="">
-        <img class="banner_cards" onmouseover="toggle(id)" id="luck" src="images/cards/luck_card.jpg" alt="">
-        <img class="banner_cards" onmouseover="toggle(id)" id="selena" src="images/cards/selena_card.jpg" alt="">
-        <img class="banner_cards" onmouseover="toggle(id)" id="servant" src="images/cards/servant_card.jpg" alt="">
+
+        <img class="banner_cards" onmouseover="toggle(id)" id="emancipation" src="images/cards/emancipation_card.jpg" 
+        onclick="save_movie_id_in_loc_strge(alt)" alt="715931" >
+
+        <img class="banner_cards" onmouseover="toggle(id)" id="blush" src="images/cards/blush_card.jpg" 
+        onclick="save_movie_id_in_loc_strge(alt)" alt="818350" >
+
+        <img class="banner_cards" onmouseover="toggle(id)" id="causeaway" src="images/cards/causeway_card.jpg" 
+        onclick="save_movie_id_in_loc_strge(alt)" alt="595586" >
+
+        <img class="banner_cards" onmouseover="toggle(id)" id="luck" src="images/cards/luck_card.jpg" 
+        onclick="save_movie_id_in_loc_strge(alt)" alt="585511" >
+
+        <img class="banner_cards" onmouseover="toggle(id)" id="selena" src="images/cards/selena_card.jpg" 
+        onclick="save_movie_id_in_loc_strge(alt)" alt="1022256" >
+
+        <img class="banner_cards" onmouseover="toggle(id)" id="greyhound" src="images/cards/greyhound_card.jpg" 
+        onclick="save_movie_id_in_loc_strge(alt)" alt="590385" >
 
       </div>
     </div>
-
-
-    <!-- <div id="accordian">
-      <h1>Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima sequi temporibus id, quis totam ipsa praesentium beatae dolore laboriosam voluptatum ea tempore quod dicta impedit, modi quisquam voluptatem, cum excepturi eligendi! Sed sint expedita in, ad sit debitis repellendus. Numquam, alias nam neque ducimus voluptates aliquid nemo illo ad omnis?</h1>
-      
-      <h1>Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima sequi temporibus id, quis totam ipsa praesentium beatae dolore laboriosam voluptatum ea tempore quod dicta impedit, modi quisquam voluptatem, cum excepturi eligendi! Sed sint expedita in, ad sit debitis repellendus. Numquam, alias nam neque ducimus voluptates aliquid nemo illo ad omnis?</h1>
-      <h1>Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima sequi temporibus id, quis totam ipsa praesentium beatae dolore laboriosam voluptatum ea tempore quod dicta impedit, modi quisquam voluptatem, cum excepturi eligendi! Sed sint expedita in, ad sit debitis repellendus. Numquam, alias nam neque ducimus voluptates aliquid nemo illo ad omnis?</h1>
-      <h1>Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima sequi temporibus id, quis totam ipsa praesentium beatae dolore laboriosam voluptatum ea tempore quod dicta impedit, modi quisquam voluptatem, cum excepturi eligendi! Sed sint expedita in, ad sit debitis repellendus. Numquam, alias nam neque ducimus voluptates aliquid nemo illo ad omnis?</h1>
-      <h1>Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima sequi temporibus id, quis totam ipsa praesentium beatae dolore laboriosam voluptatum ea tempore quod dicta impedit, modi quisquam voluptatem, cum excepturi eligendi! Sed sint expedita in, ad sit debitis repellendus. Numquam, alias nam neque ducimus voluptates aliquid nemo illo ad omnis?</h1>
-      <h1>Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima sequi temporibus id, quis totam ipsa praesentium beatae dolore laboriosam voluptatum ea tempore quod dicta impedit, modi quisquam voluptatem, cum excepturi eligendi! Sed sint expedita in, ad sit debitis repellendus. Numquam, alias nam neque ducimus voluptates aliquid nemo illo ad omnis?</h1>
-      <h1>Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima sequi temporibus id, quis totam ipsa praesentium beatae dolore laboriosam voluptatum ea tempore quod dicta impedit, modi quisquam voluptatem, cum excepturi eligendi! Sed sint expedita in, ad sit debitis repellendus. Numquam, alias nam neque ducimus voluptates aliquid nemo illo ad omnis?</h1>
-      <h1>Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima sequi temporibus id, quis totam ipsa praesentium beatae dolore laboriosam voluptatum ea tempore quod dicta impedit, modi quisquam voluptatem, cum excepturi eligendi! Sed sint expedita in, ad sit debitis repellendus. Numquam, alias nam neque ducimus voluptates aliquid nemo illo ad omnis?</h1>
-    </div> -->
     
     <div id="container_search">
       <div class="genre_box">
@@ -368,8 +63,17 @@
         </div>
       </div>  
     </div>
-    
-    <div id="container"></div>
+<!--     
+    <div id="container-recomended">
+      <div class="genre_box">
+        <h2>Searched Movies</h2>
+        <div class="cards_container_five">
+        </div>
+      </div> 
+    </div> -->
+
+    <div id="container">
+    </div>
 
     <div id="footer">
       <p>Copyright © 2022 Cloud TV Inc. All Rights Reserved.</p>
@@ -393,6 +97,7 @@
     </div>
   </body>
 </html>
+
 <script>
   obj=JSON.parse(localStorage.getItem("login_user")) || {};
   if(obj.name==undefined){
@@ -404,8 +109,9 @@
     if(obj.subscriber=="Subscribed"){
       document.querySelector("#star").style.display="block";
       document.querySelector(".but_trial").innerText="Watch Now";
-      document.querySelector("#bottom_trial_box").style.display="none";      
-      go_to="/show.html";
+      document.querySelector("#bottom_trial_box").style.display="none";     
+      document.querySelector("#details h6").style.visibility="hidden";        
+      go_to="/movie.html";
     }else{
       document.querySelector("#star").style.display="none";
       document.querySelector(".but_trial").innerText="Buy Subscription Now";
@@ -416,7 +122,6 @@
     document.querySelector("#sign_out").style.display="block";
     document.querySelector("#username").style.display="block";
     document.querySelector("#username").innerText="Hello, "+obj.name;
-    
   }
 
   sign_out=()=>{
@@ -428,21 +133,24 @@
   banner_button_event=()=>{    
     window.location.href = go_to;
   }
+
+  // // ---------- getting_saved_movie_id_from_loc_strge_to_use_in_video_trailer_api_call_on_click_next_page -------------
+
+  // movie_id=localStorage.getItem("movie_id");
+
+  // fetch(`https://api.themoviedb.org/3/movie/${movie_id}/videos?api_key=9fdf44906b9c7ca76e83f98db3f01da9`)  
+  //   .then(res => res.json())
+  //   .then(data => {
+  //     document.querySelector('iframe').src=`https://youtube.com/embed/${data.results[0].key}?start=10&end=300&rel=0&showinfo=0&autoplay=1&mute=1&controls=0&modestbranding=1`;
+  // })
+
+
+
   // --------------------------------------     Banner -------------------------------------------------
   //               banner cards data
   movie = [
     {
       id: 1,
-      title: "causeaway",
-      prod_img: "images/banner/causeaway_prod.webp",
-      ban_img: "images/banner/causeway.jpg",
-      source:
-        "https://www.youtube.com/embed/VojBOTd6Euo?start=10&end=300&rel=0&showinfo=0&autoplay=1&mute=1&controls=0&modestbranding=1",
-      genre: "Drama • 1 hr 34 min <span>U/A 16+</span>",
-      desc: "A soldier strggling back home forms an unexpected bond. Watch the new film.",
-    },
-    {
-      id: 2,
       title: "emancipation",
       prod_img: "images/banner/emancipation_prod.webp",
       ban_img: "images/banner/emancipation.jpg",
@@ -452,14 +160,25 @@
       desc: "The new film premieres 9 Decmber. Add to Up Next.",
     },
     {
-      id: 3,
-      title: "ghost_writer",
-      prod_img: "images/banner/ghost_writer_prod.webp",
-      ban_img: "images/banner/ghost_writer.jpg",
+      id: 2,
+      title: "blush",
+      prod_img: "images/banner/blush_prod.webp",
+      ban_img: "images/banner/blush.jpg",
       source:
-        "https://www.youtube.com/embed/jc-Z6eSVaLM?start=10&end=300&rel=0&showinfo=0&autoplay=1&mute=1&controls=0&modestbranding=1",
-      genre: "Kids & Family<span>U/A 7+</span>",
-      desc: "Best friends embark on new adventures with beloved book characters. Watch all episodes.",
+        "https://www.youtube.com/embed/sTz__zyOhds?start=10&end=300&rel=0&showinfo=0&autoplay=1&mute=1&controls=0&modestbranding=1",
+      genre: "Short Films • 10 min <span>U/A 7+</span>",
+      desc: "A horticulturalist-astronaut crashes onto a desolate planet. Watch the new film.",
+    },
+    
+    {
+      id: 3,
+      title: "causeaway",
+      prod_img: "images/banner/causeaway_prod.webp",
+      ban_img: "images/banner/causeway.jpg",
+      source:
+        "https://www.youtube.com/embed/VojBOTd6Euo?start=10&end=300&rel=0&showinfo=0&autoplay=1&mute=1&controls=0&modestbranding=1",
+      genre: "Drama • 1 hr 34 min <span>U/A 16+</span>",
+      desc: "A soldier strggling back home forms an unexpected bond. Watch the new film.",
     },
     {
       id: 4,
@@ -483,13 +202,13 @@
     },
     {
       id: 6,
-      title: "servant",
-      prod_img: "images/banner/servant_prod.webp",
-      ban_img: "images/banner/servant.jpg",
+      title: "greyhound",
+      prod_img: "images/banner/greyhound_prod.webp",
+      ban_img: "images/banner/greyhound.jpg",
       source:
-        "https://www.youtube.com/embed/P77p8LSKvMc?start=10&end=300&rel=0&showinfo=0&autoplay=1&mute=1&controls=0&modestbranding=1",
-      genre: "Thriller <span>A</span>",
-      desc: "The chilling series returns for Season 4 on 13 January. Catch up now.",
+        "https://www.youtube.com/embed/eyzxu26-Wqk?start=10&end=300&rel=0&showinfo=0&autoplay=1&mute=1&controls=0&modestbranding=1",
+      genre: "Action • 1 hr 31 min <span>13+ A</span>",
+      desc: "A thrilling WWII story inspired by actual events. Catch up now.",
     },
   ];
   // hiding video on pageloads
@@ -583,7 +302,7 @@
       makeCards2(category,data);
     }
   }
-  
+
   makeCards1=(id,data)=>{    
     cardsContainer=document.getElementById(id);
     for(let i=0;i<5;i++){
@@ -595,7 +314,7 @@
         }
       cardsContainer.innerHTML+=
       `
-      <div class="cards">
+      <div class="cards" onclick="save_movie_id_in_loc_strge(id)" id="${data[i].id}">
         <img src="https://image.tmdb.org/t/p/w500${data[i].backdrop_path}">
         <p class="movie_title">${data[i].title}</p>
       </div>
@@ -613,7 +332,7 @@
         }
       cardsContainer.innerHTML+=
       `
-      <div class="cards">
+      <div class="cards" onclick="save_movie_id_in_loc_strge(id)" id="${data[i].id}">
         <img src="https://image.tmdb.org/t/p/w500${data[i].backdrop_path}">
         <p class="movie_title">${data[i].title}</p>
       </div>
@@ -621,58 +340,59 @@
     }
   }
 
-// --------------------------------------     movies onn Search  -------------------------------------------------
+  save_movie_id_in_loc_strge=(id) => {
+    localStorage.setItem("movie_id",id);
+    window.open('movie.html','_blank');
+  }
+ 
+
+// --------------------------------------     movies on Search  -------------------------
 
   //            getting movies on search
   document.querySelector("#container_search").style.display="none";
 
   search_movie=()=>{
-    movie=document.querySelector("#search").value;
+    movie_searched=document.querySelector("#search").value;
     
     // toggle video if searching- hide, and if not searhing - show
-    if(movie==""){
+    if(movie_searched==""){
       document.querySelector("#video").style.display="block";
       document.querySelector("#container_search").style.display="none";
     }else{
       document.querySelector("#video").style.display="none";
       document.querySelector("#container_search").style.display="block";
+
+      fetch(`https://api.themoviedb.org/3/search/movie?api_key=9fdf44906b9c7ca76e83f98db3f01da9&page=1&query=${movie_searched}`)  
+      .then(res => res.json())
+      .then(data => displayDataSearch(data));
+
+      displayDataSearch=(data)=>{
+          cardsContainer=document.querySelector("#container_search .cards_container_five");
+          cardsContainer.innerHTML="";
+          let count=0;
+          data.results.forEach((el,i)=>{
+            count++;
+            if(count>15){
+              return false;
+            }
+            if (el.backdrop_path == null) {
+              el.backdrop_path = el.poster_path;
+              if (el.backdrop_path == null) {
+                return;
+              }
+            }
+
+            cardsContainer.innerHTML+=
+            `
+            <div class="cards" onclick="save_movie_id_in_loc_strge(id)" id="${el.id}">
+                <img src="https://image.tmdb.org/t/p/w500${el.backdrop_path}">
+                <p class="movie_title">${el.title}</p>
+            </div>
+            `
+          })
+      }
     }
-    
-    url=`https://www.omdbapi.com/?apikey=5cbf57f9&s=${movie}`
-    // url=`https://www.omdbapi.com/?apikey=5cbf57f9&s=avengers`;
-    
-    async function get_Search_Data(){
-      try{
-        let res = await fetch(url);
-        let out = await res.json();
-        data = out;
-        displayDataSearch(data);
-      }catch(err){
-        console.log(err);
-      }
-    }        
-    get_Search_Data();
   }
 
-  displayDataSearch=(data)=>{
-    cardsContainer=document.querySelector("#container_search .cards_container_five");
-    cardsContainer.innerHTML="";
 
-    data.Search.forEach((el,i)=>{
-
-      if(el.Poster=="N/A"){
-        el.Poster="images/no_image_found.jpg";
-      }
-
-      cardsContainer.innerHTML+=
-      `
-      <div class="cards">
-        <img src="${el.Poster}">
-        <p class="movie_title">${el.Title}</p>
-      </div>
-      `
-    })
-
-  }
-  
 </script>

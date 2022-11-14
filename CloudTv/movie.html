@@ -47,7 +47,7 @@
     <div id="video">
       <img class="img_banner" src="images/Banner/banner_default.jpg" alt="" />
       <iframe class="banner_video"        
-        src="https://www.youtube.com/embed/2Z-jaRlPovA?start=37&end=300&rel=0&showinfo=0&autoplay=1&mute=1&controls=0&modestbranding=1"></iframe>
+        src="https://www.youtube.com/embed/2Z-jaRlPovA?start=37&end=300&rel=0&showinfo=0&autoplay=1&mute=1&controls=1&rel=0&modestbranding=1" allowfullscreen></iframe>
       
       <div id="details">
         <!-- <img class="img_production" src="images/banner/ghost_writer_prod.webp" alt=""/> -->
@@ -134,19 +134,30 @@
     document.querySelector("#sign_out").style.display="none";
     document.querySelector("#username").style.display="none";
     document.querySelector("#star").style.display="none";
-    go_to="/login.html";
+    banner_button_event=()=>{    
+      window.location.href = "/login.html";
+    }
+    
   }else{
     if(obj.subscriber=="Subscribed"){
       document.querySelector("#star").style.display="block";
       document.querySelector(".but_trial").innerText="Watch Now";
       document.querySelector("#bottom_trial_box").style.display="none";      
-      document.querySelector("#details h6").style.visibility="hidden";     
-      go_to="/movie.html";
+      document.querySelector("#details h6").style.visibility="hidden";   
+      banner_button_event=()=>{    
+        document.querySelector("#details").style.visibility="hidden";  
+        document.querySelector("#box").style.visibility="hidden";
+        document.querySelector("iframe").style.height="100vh";
+        document.querySelector("#video").style.height="100vh";        
+        document.querySelector("#video .img_banner").style.height="100vh";
+      }  
     }else{
       document.querySelector("#star").style.display="none";
       document.querySelector(".but_trial").innerText="Buy Subscription Now";
       document.querySelector("#bottom_trial_box button").innerText="Buy Subscription Now";
-      go_to="/subscription.html";
+      banner_button_event=()=>{    
+        window.location.href = "/subscription.html";
+      }  
     }
     document.querySelector("#sign_in").style.display="none";
     document.querySelector("#sign_out").style.display="block";
@@ -160,9 +171,7 @@
     window.location.href = "/index.html";
   }
 
-  banner_button_event=()=>{    
-    window.location.href = go_to;
-  }
+  
 
 
   // ---------- getting_saved_movie_id_from_loc_strge_to_use_in_VIDEO_TRAILER_api_call_on_click_next_page -------------
@@ -172,7 +181,7 @@
   fetch(`https://api.themoviedb.org/3/movie/${movie_id}/videos?api_key=9fdf44906b9c7ca76e83f98db3f01da9`)  
     .then(res => res.json())
     .then(data => {
-      document.querySelector('iframe').src=`https://youtube.com/embed/${data.results[0].key}?start=10&end=300&rel=0&showinfo=0&autoplay=1&mute=1&controls=0&modestbranding=1`;
+      document.querySelector('iframe').src=`https://youtube.com/embed/${data.results[0].key}?start=10&end=300&rel=0&showinfo=0&autoplay=1&mute=1&controls=1&rel=0&modestbranding=1`;
   })
   
 
@@ -266,7 +275,7 @@
       prod_img: "images/banner/emancipation_prod.webp",
       ban_img: "images/banner/emancipation.jpg",
       source:
-        "https://www.youtube.com/embed/hGoNxmTDsJs?start=10&end=300&rel=0&showinfo=0&autoplay=1&mute=1&controls=0&modestbranding=1",
+        "https://www.youtube.com/embed/hGoNxmTDsJs?start=10&end=300&rel=0&showinfo=0&autoplay=1&mute=1&controls=1&rel=0&modestbranding=1",
       genre: "2022 | Thriller, History, Drama.",
       desc: "Inspired by the gripping true story of a man who would do anything for his family—and for freedom. When Peter, an enslaved man, risks his life to escape and return to his family, he embarks on a peril...",
       cast_names: "Starring: Will Smith, Ben Foster, Charmaine Bingwa, Steven Ogg, Gilbert Owuor."
@@ -278,7 +287,7 @@
       prod_img: "images/banner/blush_prod.webp",
       ban_img: "images/banner/blush.jpg",
       source:
-        "https://www.youtube.com/embed/sTz__zyOhds?start=10&end=300&rel=0&showinfo=0&autoplay=1&mute=1&controls=0&modestbranding=1",
+        "https://www.youtube.com/embed/sTz__zyOhds?start=10&end=300&rel=0&showinfo=0&autoplay=1&mute=1&controls=1&rel=0&modestbranding=1",
       genre: "2021 | Animation, Science Fiction, Family.",
       desc: "When a horticulturalist-astronaut crashes onto a desolate planet, he encounters an ethereal visitor and discovers the joy of building a new life—realizing the universe has delivered something astonish...",
       cast_names: "Starring: John Lasseter, Shannon Mills, Dana Goldberg, David Ellison, Tim Mertens."
@@ -291,7 +300,7 @@
       prod_img: "images/banner/causeaway_prod.webp",
       ban_img: "images/banner/causeway.jpg",
       source:
-        "https://www.youtube.com/embed/VojBOTd6Euo?start=10&end=300&rel=0&showinfo=0&autoplay=1&mute=1&controls=0&modestbranding=1",
+        "https://www.youtube.com/embed/VojBOTd6Euo?start=10&end=300&rel=0&showinfo=0&autoplay=1&mute=1&controls=1&rel=0&modestbranding=1",
       genre: "2022 | Drama.",
       desc: "A US soldier suffers a traumatic brain injury while fighting in Afghanistan and struggles to adjust to life back home in New Orleans. When she meets local mechanic James, the pair begin to forge an un...",
       cast_names: "Starring: Jennifer Lawrence, Brian Tyree Henry, Linda Emond, Jayne Houdyshell, Stephen McKinley Henderson."
@@ -303,7 +312,7 @@
       prod_img: "images/banner/luck_prod.webp",
       ban_img: "images/banner/luck.jpg",
       source:
-        "https://www.youtube.com/embed/VoVQIvtqwB0?start=10&end=300&rel=0&showinfo=0&autoplay=1&mute=1&controls=0&modestbranding=1",
+        "https://www.youtube.com/embed/VoVQIvtqwB0?start=10&end=300&rel=0&showinfo=0&autoplay=1&mute=1&controls=1&rel=0&modestbranding=1",
       genre: "2022 | Animation, Adventure, Comedy, Fantasy.",
       desc: "Suddenly finding herself in the never-before-seen Land of Luck, the unluckiest person in the world must unite with the magical creatures there to turn her luck around....",
       cast_names: "Starring: Eva Noblezada, Simon Pegg, Jane Fonda, Whoopi Goldberg, Flula Borg."
@@ -315,7 +324,7 @@
       prod_img: "images/banner/selena_prod.webp",
       ban_img: "images/banner/selena.jpg",
       source:
-        "https://www.youtube.com/embed/oIwwBKeBUXY?start=10&end=300&rel=0&showinfo=0&autoplay=1&mute=1&controls=0&modestbranding=1",
+        "https://www.youtube.com/embed/oIwwBKeBUXY?start=10&end=300&rel=0&showinfo=0&autoplay=1&mute=1&controls=1&rel=0&modestbranding=1",
       genre: "2022 | Documentary, Music.",
       desc: "After years in the limelight, Selena Gomez achieves unimaginable stardom. But just as she reaches a new peak, an unexpected turn pulls her into darkness. This uniquely raw and intimate documentary spa...",
       cast_names: "Starring: Alek Keshishian, Alek Keshishian, Aleen Keshishian, Stephanie Meurer, Katherine LeBlond."
@@ -327,7 +336,7 @@
       prod_img: "images/banner/greyhound_prod.webp",
       ban_img: "images/banner/greyhound.jpg",
       source:
-        "https://www.youtube.com/embed/eyzxu26-Wqk?start=10&end=300&rel=0&showinfo=0&autoplay=1&mute=1&controls=0&modestbranding=1",
+        "https://www.youtube.com/embed/eyzxu26-Wqk?start=10&end=300&rel=0&showinfo=0&autoplay=1&mute=1&controls=1&rel=0&modestbranding=1",
       genre: "2019 | Drama, War, History.",
       desc: "WWII drama from film-maker Christopher Forbes which follows American fighter pilots on a perilous mission into the skies of enemy territory....",
       cast_names: "Starring: Barry W. Jerald Jr., Catherine Jerald, Stephen Gilliam, Jezibell Anat, Corbin Rivers."
