@@ -270,22 +270,23 @@
     fetch(`https://api.themoviedb.org/3/discover/movie?api_key=9fdf44906b9c7ca76e83f98db3f01da9&with_genres=${id}&page=${rand_page}`)
       .then(res => res.json())
       .then(data => {
-          makeCategoryElement(`${genres}`, data.results);
+          makeCategoryElement(`${genres}`, data.results , id);
           // console.log(`${genres}`, data.results);
       })
       .catch(err => console.log(err));
   }
   let i=0;
   container=document.querySelector('#container');
-  makeCategoryElement=(category,data)=>{
+  makeCategoryElement=(category,data,genre_id)=>{
 
     // console.log(category,data)
+
     i++;
     if(i%2==0){
       container.innerHTML+=
       `
       <div class="genre_box">
-        <h2>${category} Movies</h2>
+        <h2 class="genre_heading" onclick="save_Genre_id_in_loc_strge(id,'${category}')" id="${genre_id}">${category} Movies</h2>
         <p>Discover ${category} movies filled with wonder and imagination on Cloud TV.</p>
         <div class="cards_container_five"  id="${category}"></div>
       </div>
@@ -295,7 +296,7 @@
       container.innerHTML+=
       `
       <div class="genre_box">
-        <h2>${category} Movies</h2>
+        <h2 class="genre_heading" onclick="save_Genre_id_in_loc_strge(id,'${category}')" id="${genre_id}">${category} Movies</h2>
         <div class="cards_container_four"  id="${category}"></div>
       </div>
       `
@@ -345,6 +346,11 @@
     window.open('movie.html','_blank');
   }
  
+  save_Genre_id_in_loc_strge=(id,category) => {
+    localStorage.setItem("genre_id",id);
+    localStorage.setItem("genre_name",category);
+    window.open('genre.html','_blank');
+  }
 
 // --------------------------------------     movies on Search  -------------------------
 
